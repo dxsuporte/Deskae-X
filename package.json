@@ -1,0 +1,46 @@
+{
+  "name": "deskae-x",
+  "productName": "Deskae-X",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Desktop APP to create server",
+  "main": "main.js",
+  "author": "DXSuporte - Danilo Xavier",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "package-win32": "electron-packager . Deskae-X --overwrite --platform=win32 --arch=ia32 --prune=false --out=build/build-win --icon public/favicon.ico --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Deskae-X\"",
+    "package-win64": "electron-packager . Deskae-X --overwrite --platform=win32 --arch=x64 --prune=false --out=build/build-win --icon public/favicon.ico --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Deskae-X\"",
+    "package-linux": "electron-packager . Deskae-X --overwrite --platform=linux --arch=x64 --prune=false --out=build/build-linux --icon public/favicon.png",
+    "package-apple": "electron-packager . Deskae-X --overwrite --platform=darwin --arch=x64 --prune=false --out=build/build-apple --icon public/favicon.png",
+    "build:linux": "node ace build --production && cp .env build && cp -fR node_modules build",
+    "build:compile": "npm run package-win32 && npm run package-win64 && npm run package-linux && npm run package-apple",
+    "dev": "node ace serve --watch"
+  },
+  "devDependencies": {
+    "@adonisjs/assembler": "^5.3.7",
+    "adonis-preset-ts": "^2.1.0",
+    "electron": "^14.0.0",
+    "electron-packager": "^15.4.0",
+    "pino-pretty": "^7.0.0",
+    "typescript": "~4.2",
+    "youch": "^2.2.2",
+    "youch-terminal": "^1.1.1"
+  },
+  "dependencies": {
+    "@adonisjs/auth": "^8.0.9",
+    "@adonisjs/core": "^5.3.4",
+    "@adonisjs/lucid": "^16.0.2",
+    "@adonisjs/repl": "^3.1.6",
+    "@adonisjs/session": "^6.1.2",
+    "@adonisjs/shield": "^7.0.6",
+    "@adonisjs/view": "^6.1.1",
+    "luxon": "^2.0.2",
+    "open": "^8.2.1",
+    "phc-bcrypt": "^1.0.7",
+    "proxy-addr": "^2.0.7",
+    "reflect-metadata": "^0.1.13",
+    "source-map-support": "^0.5.20",
+    "sqlite3": "^5.0.2"
+  }
+}
