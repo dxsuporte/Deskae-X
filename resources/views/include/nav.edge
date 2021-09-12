@@ -1,0 +1,33 @@
+<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse nav-menu">
+    <div class="sidebar-sticky pt-3">
+        @if(auth.user)
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link {{{activeMenu == '/home' ? 'active' : ''}}}" href="/">
+                    <i class="icofont-ui-home"></i> Home
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="icofont-users-alt-4"></i> Pacientes
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="icofont-ui-user"></i> Usuários
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="icofont-gear"></i> Configuração
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link modalLogout" data-toggle="modal" data-target=".modalDefault">
+                    <i class="icofont-logout"></i> Sair
+                </a>
+            </li>
+        </ul>
+        @endif
+    </div>
+</nav>

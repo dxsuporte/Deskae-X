@@ -1,0 +1,43 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Pacientes</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group mr-2">
+            <button type="button" class="btn btn-sm btn-outline-success">
+                <i class="icofont-ui-add"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover text-center">
+        <thead class="thead-light">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Sobrenome</th>
+                <th>data</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="align-middle">#1</td>
+                <td class="align-middle">Maria</td>
+                <td class="align-middle">Nazare</td>
+                <td class="align-middle">01/01/2021</td>
+                <td class="align-middle">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a href="#" class="btn btn-dark" title="VISUALIZAR"><i class="icofont-eye-alt"></i></a>
+                        <a href="#" class="btn btn-primary" title="EDITAR"><i class="icofont-ui-edit"></i></a>
+                        <a href="#"
+                            onclick="return confirm('Tem certeza que deseja excluir esse item permanentemente?');"
+                            class="btn btn-danger" title="EXCLUIR">
+                            <i class="icofont-ui-delete"></i>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
