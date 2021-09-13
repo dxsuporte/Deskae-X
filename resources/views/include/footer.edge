@@ -1,8 +1,10 @@
-<footer class="mt-auto bg-light py-3">
+<footer class="mt-auto bg-dark py-3">
     <div class="copyright">
-        Copyright &copy; 2021 <strong>Empresa.</strong>
-        <i> Desenvolvido por</i>
-        <a href="http://dxsuporte.com.br/" target="_blank">DX Suporte</a>
+        <div class="ml-2">
+            Copyright &copy; {{myAno}} <strong>{{auth.user ? myEmitente.nf : ''}}.</strong>
+            <i> Desenvolvido por</i>
+            <a href="http://dxsuporte.com.br/" target="_blank">DX Suporte</a>
+        </div>
     </div>
 </footer>
 

@@ -23,6 +23,18 @@ export default class User extends BaseModel {
   public rememberMeToken?: string
 
   @column()
+  public primaryText: string
+
+  @column()
+  public primaryColor: string
+
+  @column()
+  public secondaryColor: string
+
+  @column()
+  public admin: boolean
+
+  @column()
   public active: boolean
 
   @column.dateTime({ autoCreate: true })

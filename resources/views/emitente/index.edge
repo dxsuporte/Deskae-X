@@ -1,0 +1,35 @@
+@layout('main')
+
+@section('conternt')
+<form action="/emitente/{{myEmitente.id}}/edit" method="post">
+    {{ csrfField() }}
+    <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2"><i class="icofont-gear"></i> Configuração</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group mr-2">
+                <button class="btn btn-outline-primary" title="SALVAR" type="submit">
+                    <i class="icofont-save"></i> Salvar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label for="nf">Nome Emitente</label>
+                    <input id="nf" type="text" name="nf" value="{{myEmitente.nf}}"
+                        class="form-control {{flashMessages.has('errors.nf') ? 'is-invalid' : ''}}" required>
+                    <div class="invalid-feedback">
+                        {{flashMessages.get('errors.nf')}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+@endsection

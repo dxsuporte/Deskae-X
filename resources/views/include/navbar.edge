@@ -1,15 +1,19 @@
-<nav class="navbar navbar-dark bg-dark sticky-top flex-md-nowrap p-0 shadow text-center">
-    <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="/">Liga Feminina</a>
+<nav class="navbar navbar-dark bg-dark sticky-top">
+    <a class="navbar-brand" href="#">
+        <img src="favicon.png" width="60" height="60" class="d-inline-block align-top" alt="">
+        <b class="h2">{{auth.user ? myEmitente.nf : ''}}</b>
+    </a>
     <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse"
         data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <ul class="navbar-nav px-3">
-        @if(auth.user)
-        <li class="nav-item text-nowrap">
-            <a class="nav-link" href="#">{{auth.user.username}}</a>
-        </li>
-        @endif
-    </ul>
+    <div class="d-none d-md-block">
+        <nav class="nav h2">
+            @if(auth.user)
+            <a class="nav-link" href="#"><b>{{auth.user.username}}</b></a>
+            @endif
+        </nav>
+    </div>
+
 </nav>

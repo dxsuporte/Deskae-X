@@ -1,5 +1,5 @@
-<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse nav-menu">
-    <div class="sidebar-sticky pt-3">
+<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse nav-menu">
+    <div class="sidebar-sticky pt-5">
         @if(auth.user)
         <ul class="nav flex-column">
             <li class="nav-item">
@@ -18,7 +18,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link {{{activeMenu == '/emitente' ? 'active' : ''}}}" href="/emitente">
                     <i class="icofont-gear"></i> Configuração
                 </a>
             </li>

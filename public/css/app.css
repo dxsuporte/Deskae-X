@@ -1,5 +1,5 @@
 :root {
-  --primaryText: #343a40;
+  --primaryText: #f8f9fa;
   --primaryColor: #E75480;
   --secondaryColor: #E75480;
 }
@@ -9,8 +9,8 @@
   --------------------------------------------------------------*/
 
 .dx-alert {
-  position:absolute;
-  top: 75px;
+  position: absolute;
+  top: 20px;
   right: 0.5%;
   box-shadow: 2px 2px 15px rgba(0, 0, 0, 1.0);
   z-index: 1032 !important;
@@ -87,9 +87,7 @@ a:hover {
   bottom: 0;
   left: 0;
   z-index: 100;
-  /* Behind the navbar */
   padding: 48px 0 0;
-  /* Height of navbar */
 }
 
 @media (max-width: 767.98px) {
@@ -105,14 +103,6 @@ a:hover {
 /*--------------------------------------------------------------
   # Navigation Menu
   --------------------------------------------------------------*/
-
-.navbar-brand {
-  padding-top: 14px;
-  padding-bottom: 14px;
-  font-size: 18px;
-  background-color: rgba(0, 0, 0, .25);
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
-}
 
 .navbar .navbar-toggler {
   top: .25rem;
@@ -149,6 +139,7 @@ footer {
   position: fixed;
   bottom: 0;
   width: 100%;
+  color: var(--primaryText);
 }
 
 footer .copyright {
