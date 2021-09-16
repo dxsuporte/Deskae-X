@@ -21,8 +21,15 @@ export default class HomeController {
         if (user) {
             return response.redirect('/home')
         } else {
-            await User.create({ username: 'root', email: 'root@root.com', password: 'root@123', active: true })
-            await Emitente.create({ nf: 'Nome Empresa' })
+            await User.createMany([
+                {
+                    username: 'root', email: 'root@root.com', admin: true, active: true
+                },
+                {
+                    username: 'admin', email: 'admin@admin.com', password: 'admin@admin', admin: true, active: true
+                },
+            ])
+            await Emitente.create({ nf: 'Deskae' })
             return response.redirect('/')
         }
     }
@@ -37,8 +44,15 @@ export default class HomeController {
         if (user) {
             return view.render('login')
         } else {
-            await User.create({ username: 'root', email: 'root@root.com', password: 'root@123', active: true })
-            await Emitente.create({ nf: 'Nome Empresa' })
+            await User.createMany([
+                {
+                    username: 'root', email: 'root@root.com', admin: true, active: true
+                },
+                {
+                    username: 'admin', email: 'admin@admin.com', password: 'admin@admin', admin: true, active: true
+                },
+            ])
+            await Emitente.create({ nf: 'Deskae' })
             return response.redirect('/')
         }
     }

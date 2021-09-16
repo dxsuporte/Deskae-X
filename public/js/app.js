@@ -46,7 +46,7 @@
     $(document).on('click', '.modalLogout', function (event) {
         $('.urlFormDefault')[0].reset();
         $(".urlFormDefault").attr('action', '/logout');
-        $('.modalTitleDefault').html('<i class="icofont-logout"></i> Sair do sistema');
+        $('.modalTitleDefault').html('<i class="icofont-logout"></i> Sair');
         $('.modalBodyDefault').html('<p class="h6 text-center"> Deseja Sair do Sistema? </p>');
     });
 

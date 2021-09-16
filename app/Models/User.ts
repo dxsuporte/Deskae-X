@@ -23,13 +23,10 @@ export default class User extends BaseModel {
   public rememberMeToken?: string
 
   @column()
-  public primaryText: string
+  public theme: number
 
   @column()
-  public primaryColor: string
-
-  @column()
-  public secondaryColor: string
+  public color: string
 
   @column()
   public admin: boolean

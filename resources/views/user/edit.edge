@@ -1,0 +1,95 @@
+@layout('main')
+
+@section('conternt')
+
+<form action="/user/{{user.id}}/edit" method="post">
+    {{ csrfField() }}
+    <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2"><i class="icofont-ui-edit"></i> Editar</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <a href="/user" title="VOLTAR" class="btn btn-outline-secondary mr-1">
+                <i class="icofont-reply"></i> voltar
+            </a>
+            <button class="btn btn-outline-primary" title="SALVAR" type="submit">
+                <i class="icofont-save"></i> Salvar
+            </button>
+        </div>
+    </div>
+
+    <div class="card text-white bg-dark mb-4">
+        <div class="card-body">
+            <div class="form-row">
+                <div class="form-group col-md-5">
+                    <label for="username">Nome</label>
+                    <input id="username" type="text" name="username" value="{{user.username}}"
+                        class="form-control {{flashMessages.has('errors.username') ? 'is-invalid' : ''}}" required>
+                    <div class="invalid-feedback">
+                        {{flashMessages.get('errors.username')}}
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="email">Email</label>
+                    <input id="email" type="email" name="email" value="{{user.email}}"
+                        class="form-control {{flashMessages.has('errors.email') ? 'is-invalid' : ''}}" required>
+                    <div class="invalid-feedback">
+                        {{flashMessages.get('errors.email')}}
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="createdAt">Nascimento</label>
+                    <input id="createdAt" type="date" name="createdAt" value="{{user.createdAt.toFormat('yyyy-LL-dd')}}"
+                        class="form-control {{flashMessages.has('errors.createdAt') ? 'is-invalid' : ''}}" required>
+                    <div class="invalid-feedback">
+                        {{flashMessages.get('errors.createdAt')}}
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="password">Senha</label>
+                    <input id="password" type="password" name="password"
+                        class="form-control {{flashMessages.has('errors.password') ? 'is-invalid' : ''}}">
+                    <div class="invalid-feedback">
+                        {{flashMessages.get('errors.password')}}
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="theme">Tema</label>
+                    <select id="theme" name="theme"
+                        class="custom-select {{flashMessages.has('errors.theme') ? 'is-invalid' : ''}}" required>
+                        <option {{ user.theme == 0 ? 'selected' : '' }} value="0">Escuro</option>
+                        <option {{ user.theme == 1 ? 'selected' : '' }} value="1">Claro</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        {{flashMessages.get('errors.theme')}}
+                    </div>
+                </div>
+                <div class="form-group col-md-1">
+                    <label for="color">Cor</label>
+                    <input id="color" type="color" name="color" value="{{user.color}}"
+                        class="form-control {{flashMessages.has('errors.color') ? 'is-invalid' : ''}}" required>
+                    <div class="invalid-feedback">
+                        {{flashMessages.get('errors.color')}}
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="admin">Permissão</label>
+                    <select name="admin" class="custom-select" required>
+                        <option {{ !user.admin ? 'selected' : '' }} value="0">PADRÃO</option>
+                        <option {{ user.admin ? 'selected' : '' }} value="1">ADMIN</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="active">Situação</label>
+                    <select name="active" class="custom-select" required>
+                        <option {{ !user.active ? 'selected' : '' }} value="0">INATIVO</option>
+                        <option {{ user.active ? 'selected' : '' }} value="1">ATIVO</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@endsection

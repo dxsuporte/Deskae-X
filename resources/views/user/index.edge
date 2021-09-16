@@ -1,0 +1,156 @@
+@layout('main')
+
+@section('conternt')
+
+@if(auth.user.admin)
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2"><i class="icofont-ui-user"></i> Usuário</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group mr-2">
+            <button type="button" class="btn btn-outline-success modalAddUser" data-toggle="modal"
+                data-target=".modalDefault">
+                <i class="icofont-ui-add"></i> Adicionar
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="table-responsive-lg p-0">
+    <table class="table table-dark table-bordered table-hover text-center dataTable">
+        <thead>
+            <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Email</th>
+                <th scope="col">Nacimento</th>
+                <th scope="col">Situação</th>
+                <th scope="col">Acões</th>
+            </tr>
+        </thead>
+        <tbody>
+            @each(user in user)
+            <tr>
+                <td class="align-middle" scope="row">{{user.username}}</td>
+                <td class="align-middle">{{user.email}}</td>
+                <td class="align-middle">{{user.createdAt.toFormat('dd/LL/yyyy') }}</td>
+                <td class="align-middle">
+                    @if(user.active)
+                    <span class="badge badge-success">ATIVO</span><br>
+                    {{{ user.admin ? '<span class="badge badge-primary">ADMIN</span>' : '<span class="badge badge-info">PADRÃO</span>' }}}
+                    @else
+                    <span class="badge badge-danger">INATIVO</span><br>
+                    {{{ user.admin ? '<span class="badge badge-primary">ADMIN</span>' : '<span class="badge badge-info">PADRÃO</span>' }}}
+                    @endif
+                <td class="align-middle">
+                    <a href="/user/{{user.id}}/edit" class="btn btn-outline-primary" title="EDITAR">
+                        <i class="icofont-ui-edit"></i>
+                    </a>
+                    <button type="button" data-toggle="modal" data-target=".modalDefault"
+                        class="btn btn-outline-danger modalDeleteUser" userId={{user.id}} title="EXCLUIR">
+                        <i class="icofont-ui-delete"></i>
+                    </button>
+                </td>
+            </tr>
+            @endeach
+        </tbody>
+    </table>
+</div>
+
+<script>
+    !(function ($) {
+    "use strict";
+
+    $(document).on('click', '.modalAddUser', function (event) {
+        $('.urlFormDefault')[0].reset();
+        $(".urlFormDefault").attr('action', '/user/add');
+        $('.modalTitleDefault').html('<i class="icofont-ui-add"></i> Adicionar');
+        $('.modalBodyDefault').html('<p class="h6 text-center"> Deseja adicionar um usuário ? </p>');
+    });
+
+    $(document).on('click', '.modalDeleteUser', function (event) {
+        $('.urlFormDefault')[0].reset();
+        $(".urlFormDefault").attr('action', '/user/' + $(this).attr('userId') + '/delete');
+        $('.modalTitleDefault').html('<i class="icofont-ui-delete"></i> Excluir');
+        $('.modalBodyDefault').html('<p class="h6 text-center"> Tem certeza que deseja excluir esse item permanentemente? </p>');
+    });
+
+})(jQuery);
+</script>
+@else
+<form action="/user/{{auth.user.id}}/edit" method="post">
+    {{ csrfField() }}
+    <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2"><i class="icofont-ui-user"></i> Usuário</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group mr-2">
+                <button class="btn btn-outline-primary" title="SALVAR" type="submit">
+                    <i class="icofont-save"></i> Salvar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card text-white bg-dark mb-4">
+        <div class="card-body">
+            <div class="form-row">
+                <div class="form-group col-md-5">
+                    <label for="username">Nome</label>
+                    <input id="username" type="text" name="username" value="{{auth.user.username}}"
+                        class="form-control {{flashMessages.has('errors.username') ? 'is-invalid' : ''}}" required>
+                    <div class="invalid-feedback">
+                        {{flashMessages.get('errors.username')}}
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="email">Email</label>
+                    <input id="email" type="email" name="email" value="{{auth.user.email}}"
+                        class="form-control {{flashMessages.has('errors.email') ? 'is-invalid' : ''}}" required>
+                    <div class="invalid-feedback">
+                        {{flashMessages.get('errors.email')}}
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="createdAt">Nascimento</label>
+                    <input id="createdAt" type="date" name="createdAt"
+                        value="{{auth.user.createdAt.toFormat('yyyy-LL-dd')}}"
+                        class="form-control {{flashMessages.has('errors.createdAt') ? 'is-invalid' : ''}}" required>
+                    <div class="invalid-feedback">
+                        {{flashMessages.get('errors.createdAt')}}
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="password">Senha</label>
+                    <input id="password" type="password" name="password"
+                        class="form-control {{flashMessages.has('errors.password') ? 'is-invalid' : ''}}">
+                    <div class="invalid-feedback">
+                        {{flashMessages.get('errors.password')}}
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="theme">Tema</label>
+                    <select id="theme" name="theme"
+                        class="custom-select {{flashMessages.has('errors.theme') ? 'is-invalid' : ''}}" required>
+                        <option {{ auth.user.theme == 0 ? 'selected' : '' }} value="0">Escuro</option>
+                        <option {{ auth.user.theme == 1 ? 'selected' : '' }} value="1">Claro</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        {{flashMessages.get('errors.theme')}}
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="color">Cor</label>
+                    <input id="color" type="color" name="color" value="{{auth.user.color}}"
+                        class="form-control {{flashMessages.has('errors.color') ? 'is-invalid' : ''}}" required>
+                    <div class="invalid-feedback">
+                        {{flashMessages.get('errors.color')}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@endif
+
+@endsection
