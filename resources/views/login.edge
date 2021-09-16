@@ -32,29 +32,29 @@
 
 
   <div class="d-flex justify-content-center mt-5">
-    <div class="h-auto d-inline-block mt-5" style="min-width: 60%;">
-      <div class="card text-white bg-dark m-5">
+    <div class="h-auto d-inline-block mt-5" style="min-width: 30%;">
+      <div class="card bg-dark text-white mt-5">
         <form action="/login" method="post">
           {{ csrfField() }}
-          <div class="card-body mt-5">
-            <div class="form-row">
-              <div class="form-group col-lg-6">
-                <input type="email" name="email" value="{{flashMessages.get('email') || ''}}" placeholder="Email..."
-                  required
-                  class="form-control form-control-lg {{flashMessages.has('errors.email') ? 'is-invalid' : ''}}">
-                <div class="invalid-feedback">
-                  {{flashMessages.get('errors.email')}}
-                </div>
-              </div>
-              <div class="form-group col-lg-6">
-                <input type="password" name="password" placeholder="Senha..." required
-                  class="form-control form-control-lg {{flashMessages.has('errors.password') ? 'is-invalid' : ''}}">
-                <div class="invalid-feedback">
-                  {{flashMessages.get('errors.password')}}
-                </div>
+          <div class="card-body mt-4">
+            <div class="form-group col-12 mb-5 text-center">
+              <img src="/favicon.png" width="100" height="100" class="d-inline-block align-top" alt="">
+            </div>
+            <div class="form-group col-12">
+              <input type="email" name="email" value="{{flashMessages.get('email') || ''}}" placeholder="Email..."
+                required class="form-control form-control-lg {{flashMessages.has('errors.email') ? 'is-invalid' : ''}}">
+              <div class="invalid-feedback">
+                {{flashMessages.get('errors.email')}}
               </div>
             </div>
-            <div class="form-group col-lg-4">
+            <div class="form-group col-12">
+              <input type="password" name="password" placeholder="Senha..." required
+                class="form-control form-control-lg {{flashMessages.has('errors.password') ? 'is-invalid' : ''}}">
+              <div class="invalid-feedback">
+                {{flashMessages.get('errors.password')}}
+              </div>
+            </div>
+            <div class="form-group col-12">
               <div class="form-group form-check ml-2">
                 <input type="checkbox" name="rememberMe" value="1" class="form-check-input">
                 <label class="form-check-label" for="rememberMe">Mantenha-me conectado</label>
@@ -76,7 +76,7 @@
       <div class="ml-2">
         Copyright &copy; {{myAno}} <strong>{{auth.user ? myEmitente.nf : ''}}.</strong>
         <i> Desenvolvido por</i>
-        <a href="http://dxsuporte.com.br/" target="_blank">DX Suporte</a>
+        <b>dxsuporte.com.br</b>
       </div>
     </div>
   </footer>
