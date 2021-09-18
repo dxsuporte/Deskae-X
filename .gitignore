@@ -1,5 +1,6 @@
 node_modules
 public/db.sqlite3
+public/uploads
 build
 coverage
 tmp

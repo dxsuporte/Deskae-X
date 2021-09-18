@@ -7,8 +7,10 @@ export default class Emitentes extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       table.string('nf', 255).notNullable()
+      table.string('type').notNullable().defaultTo('business')
+      table.text('img').defaultTo('/favicon.png')
+      table.timestamp('updated_at', { useTz: true }).notNullable()
       table.timestamp('created_at', { useTz: true })
-      table.timestamp('updated_at', { useTz: true })
     })
   }
 

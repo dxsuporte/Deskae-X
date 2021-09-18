@@ -2,7 +2,7 @@
     @if(auth.user)
     <nav class="nav h2">
         <a class="nav-link" href="/">
-            <img src="/favicon.png" width="50" height="50" class="d-inline-block align-top" alt="">
+            <img src="{{ myEmitente.img }}" width="50" height="50" class="d-inline-block align-top" alt="">
             <b class="h2">{{ myEmitente.nf }}</b>
         </a>
     </nav>
@@ -15,7 +15,7 @@
         <nav class="nav h2">
             <a class="nav-link" href="/user">
                 <b class="h2">{{auth.user.username}}</b>
-                <!-- <img src="favicon.png" width="50" height="50" class="d-inline-block align-top" alt=""> -->
+                <img src="{{ auth.user.img }}" width="50" height="50" class="d-inline-block align-top" alt="">
             </a>
         </nav>
     </div>

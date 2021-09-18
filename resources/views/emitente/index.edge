@@ -2,7 +2,7 @@
 
 @section('conternt')
 
-<form action="/emitente/{{myEmitente.id}}/edit" method="post">
+<form action="/emitente/{{myEmitente.id}}/edit" method="post" enctype="multipart/form-data">
     {{ csrfField() }}
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -19,12 +19,36 @@
     <div class="card text-white bg-dark">
         <div class="card-body">
             <div class="form-row">
-                <div class="col-md-6 mb-3">
+                <div class="form-group col-md-4">
                     <label for="nf">Nome Emitente</label>
                     <input id="nf" type="text" name="nf" value="{{myEmitente.nf}}"
                         class="form-control {{flashMessages.has('errors.nf') ? 'is-invalid' : ''}}" required>
                     <div class="invalid-feedback">
                         {{flashMessages.get('errors.nf')}}
+                    </div>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label for="type">Tipo</label>
+                    <select id="type" name="type"
+                        class="custom-select {{flashMessages.has('errors.type') ? 'is-invalid' : ''}}">
+                        <option {{ !myEmitente.type === 'business' ? 'selected' : '' }} value="business">Comércio
+                        </option>
+                        <option {{ myEmitente.type === 'health' ? 'selected' : '' }} value="health">Saúde</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        {{flashMessages.get('errors.type')}}
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="cover_image">Logo</label>
+                    <div class="custom-file mb-3">
+                        <input id="cover_image" type="file" name="cover_image" class="custom-file-input">
+                        <label class="custom-file-label {{flashMessages.has('errors.cover_image') ? 'is-invalid' : ''}}"
+                            for="cover_image">(612 x 612) PNG, JPG, JPEG...</label>
+                        <div class="invalid-feedback">
+                            {{flashMessages.get('errors.cover_image')}}
+                        </div>
                     </div>
                 </div>
             </div>

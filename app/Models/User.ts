@@ -23,10 +23,10 @@ export default class User extends BaseModel {
   public rememberMeToken?: string
 
   @column()
-  public theme: number
+  public color: string
 
   @column()
-  public color: string
+  public img: string
 
   @column()
   public admin: boolean
@@ -34,11 +34,11 @@ export default class User extends BaseModel {
   @column()
   public active: boolean
 
-  @column.dateTime({ autoCreate: true })
-  public createdAt: DateTime
-
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @column.dateTime({ autoCreate: true })
+  public createdAt: DateTime
 
   @beforeSave()
   public static async hashPassword(user: User) {

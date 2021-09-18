@@ -37,6 +37,11 @@ export default class AuthMiddleware {
     const myEmitente = await Emitente.find(1)
     View.global('myEmitente', myEmitente)
 
+    const myMenu = {
+      client: myEmitente?.type == 'health' ? 'Paciente' : 'Cliente',
+    }
+    View.global('myMenu', myMenu)
+
     const guards = customGuards.length ? customGuards : [auth.name]
     await this.authenticate(auth, guards)
     await next()

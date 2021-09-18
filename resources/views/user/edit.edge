@@ -2,7 +2,7 @@
 
 @section('conternt')
 
-<form action="/user/{{user.id}}/edit" method="post">
+<form action="/user/{{user.id}}/edit" method="post" enctype="multipart/form-data">
     {{ csrfField() }}
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -46,7 +46,7 @@
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-4">
                     <label for="password">Senha</label>
                     <input id="password" type="password" name="password"
                         class="form-control {{flashMessages.has('errors.password') ? 'is-invalid' : ''}}">
@@ -55,17 +55,6 @@
                     </div>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="theme">Tema</label>
-                    <select id="theme" name="theme"
-                        class="custom-select {{flashMessages.has('errors.theme') ? 'is-invalid' : ''}}" required>
-                        <option {{ user.theme == 0 ? 'selected' : '' }} value="0">Escuro</option>
-                        <option {{ user.theme == 1 ? 'selected' : '' }} value="1">Claro</option>
-                    </select>
-                    <div class="invalid-feedback">
-                        {{flashMessages.get('errors.theme')}}
-                    </div>
-                </div>
-                <div class="form-group col-md-1">
                     <label for="color">Cor</label>
                     <input id="color" type="color" name="color" value="{{user.color}}"
                         class="form-control {{flashMessages.has('errors.color') ? 'is-invalid' : ''}}" required>
@@ -86,6 +75,19 @@
                         <option {{ !user.active ? 'selected' : '' }} value="0">INATIVO</option>
                         <option {{ user.active ? 'selected' : '' }} value="1">ATIVO</option>
                     </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="cover_image">Foto</label>
+                    <div class="custom-file mb-3">
+                        <input id="cover_image" type="file" name="cover_image" class="custom-file-input">
+                        <label class="custom-file-label {{flashMessages.has('errors.cover_image') ? 'is-invalid' : ''}}"
+                            for="cover_image">(612 x 612) PNG, JPG, JPEG...</label>
+                        <div class="invalid-feedback">
+                            {{flashMessages.get('errors.cover_image')}}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -19,6 +19,8 @@
   <link rel="stylesheet" type="text/css" href="{{myUrl}}/vendor/bootstrap/css/bootstrap.min.css">
   <!-- Aos -->
   <link rel="stylesheet" type="text/css" href="{{myUrl}}/vendor/aos/aos.css">
+  <!-- Datatable -->
+  <link rel="stylesheet" type="text/css" href="{{myUrl}}/vendor/DataTables/datatables.min.css">
   <!-- IcoFont -->
   <link rel="stylesheet" type="text/css" href="{{myUrl}}/vendor/icofont/icofont.min.css">
   <!-- APP CSS -->
@@ -30,6 +32,9 @@
 
 <body class="text-white bg-dark">
 
+  <!--------start navbar ----------------------->
+  @include('include/alert')
+  <!--------stop navbar ------------------------>
 
   <div class="d-flex justify-content-center mt-5">
     <div class="h-auto d-inline-block mt-5" style="min-width: 30%;">
@@ -85,6 +90,14 @@
   <script src="{{myUrl}}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- oas Files -->
   <script src="{{myUrl}}/vendor/aos/aos.js"></script>
+  <!-- Jquery dataTables-->
+  <script src="{{myUrl}}/vendor/DataTables/datatables.min.js"></script>
+  <!-- Vendor jquery-mask Files -->
+  <script src="{{myUrl}}/vendor/jquery-mask/jquery.mask.min.js"></script>
+  <!--Tinymce-->
+  <script src="{{myUrl}}/vendor/tinymce/tinymce.min.js"></script>
+  <!--APP JS-->
+  <script src="{{myUrl}}/js/app.js"></script>
 
 </body>
 

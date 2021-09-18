@@ -3,6 +3,9 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import User from 'App/Models/User'
 import UpdateUserValidator from 'App/Validators/user/UpdateUserValidator'
 
+import Application from '@ioc:Adonis/Core/Application'
+import Fs from 'fs/promises'
+
 export default class UsersController {
 
     public async index({ request, auth, view }: HttpContextContract) {
@@ -33,7 +36,11 @@ export default class UsersController {
         }
     }
 
-    public async edit({ params, view }: HttpContextContract) {
+    public async edit({ auth, session, response, params, view }: HttpContextContract) {
+        if (!auth.user?.admin) {
+            session.flash({ alertErro: 'Permissão Negada!' })
+            return response.redirect().back()
+        }
         const activeMenu = '/user'
         const user = await User.find(params.id)
         return view.render('user/edit', { activeMenu, user })
@@ -42,17 +49,33 @@ export default class UsersController {
     public async update({ request, params, session, response }: HttpContextContract) {
         await request.validate(UpdateUserValidator)
         try {
+            const user = await User.findOrFail(params.id)
+
             const password = request.input('password')
             if (password) {
                 var data = request.except(['_csrf'])
             } else {
                 var data = request.except(['_csrf', 'password'])
             }
-            const user = await User.findOrFail(params.id)
-            await user.merge({ ...data }).save()
+
+            const coverImage = request.file('cover_image')
+            if (coverImage) {
+                //Remover Pasta da Imagem Anterior
+                await Fs.rmdir(Application.publicPath('/uploads/user/' + params.id), { recursive: true })
+                await coverImage.move(Application.publicPath('/uploads/user/' + params.id), {
+                    name: params.id + '.' + coverImage.subtype,
+                    overwrite: true
+                })
+                const img = '/uploads/user/' + params.id + '/' + coverImage.fileName
+                await user.merge({ ...data, img }).save()
+            } else {
+                await user.merge({ ...data }).save()
+            }
+
             session.flash({ alertSuccess: 'Alterado com sucesso!' })
             return response.redirect().back()
         } catch (error) {
+            console.log(error)
             session.flash({ alertErro: 'Erro ao alterar!' })
             return response.redirect().back()
         }

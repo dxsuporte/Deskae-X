@@ -9,7 +9,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link {{{activeMenu == '/client' ? 'active' : ''}}}" href="/client">
-                    <i class="icofont-users-alt-4"></i> Pacitente
+                    <i class="icofont-users-alt-4"></i> {{myMenu.client}}
                 </a>
             </li>
             <li class="nav-item">
@@ -17,11 +17,13 @@
                     <i class="icofont-ui-user"></i> Usuário
                 </a>
             </li>
+            @if(auth.user.admin)
             <li class="nav-item">
                 <a class="nav-link {{{activeMenu == '/emitente' ? 'active' : ''}}}" href="/emitente">
                     <i class="icofont-gear"></i> Configuração
                 </a>
             </li>
+            @endif
             <li class="nav-item">
                 <a class="nav-link modalLogout" data-toggle="modal" data-target=".modalDefault">
                     <i class="icofont-logout"></i> Sair

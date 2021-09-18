@@ -9,12 +9,17 @@ export default class CreateUserValidator {
     nf: schema.string({ trim: true }, [
       rules.minLength(4),
     ]),
-
+    type: schema.string({ trim: true }),
+    cover_image: schema.file.optional({
+      size: '2mb',
+      extnames: ['jpg', 'gif', 'png'],
+    }),
   })
 
   public messages = {
     'nf.required': 'Campo Requerido!',
     'nf.minLength': 'Mínimo 4 carácter!',
+    'type.required': 'Campo Requerido!',
   }
 
 }

@@ -21,7 +21,10 @@ export default class CreateUserValidator {
 		password: schema.string.optional({ trim: true }, [
 			rules.minLength(6),
 		]),
-		theme: schema.string({ trim: true }),
+		cover_image: schema.file.optional({
+			size: '2mb',
+			extnames: ['jpg', 'jpeg', 'png'],
+		}),
 		color: schema.string({ trim: true }),
 	})
 
@@ -33,7 +36,6 @@ export default class CreateUserValidator {
 		'email.unique': 'O Email já Existe!',
 		'createdAt.required': 'Campo Requerido!',
 		'password.minLength': 'Mínimo 6 carácter!',
-		'theme.minLength': 'Mínimo 6 carácter!',
 		'color.minLength': 'Mínimo 6 carácter!',
 	}
 
