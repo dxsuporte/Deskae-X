@@ -1,14 +1,14 @@
 import Route from '@ioc:Adonis/Core/Route'
 
 //Default
-Route.get('/', 'HomeController.index')
+Route.get('/', 'IndexController.index')
 
 //Login
-Route.get('/login', 'HomeController.login')
-Route.post('/login', 'HomeController.checkLogin')
+Route.get('/login', 'IndexController.login')
+Route.post('/login', 'IndexController.checkLogin')
 
 //Logout
-Route.get('/logout', 'HomeController.logout')
+Route.get('/logout', 'IndexController.logout')
 
 /*--------------------------------------------------------------
   # Route Auth
@@ -17,7 +17,10 @@ Route.get('/logout', 'HomeController.logout')
 Route.group(() => {
 
   //Home
-  Route.get('/home', 'HomeController.home')
+  Route.get('/home', 'HomeController.index')
+  Route.post('/home/add', 'HomeController.create')
+  Route.post('/home/:id/update', 'HomeController.update')
+  Route.get('/home/:id/delete', 'HomeController.delete')
 
   //Client
   Route.get('/client', 'ClientsController.index')

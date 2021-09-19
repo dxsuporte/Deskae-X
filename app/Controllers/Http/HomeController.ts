@@ -1,88 +1,52 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-import Database from '@ioc:Adonis/Lucid/Database'
-import Application from '@ioc:Adonis/Core/Application'
-import Migrator from '@ioc:Adonis/Lucid/Migrator'
-import Fs from 'fs/promises'
-
-import User from 'App/Models/User'
-import Emitente from 'App/Models/Emitente'
-import LoginUserValidator from 'App/Validators/user/LoginUserValidator'
+import Home from 'App/Models/Home'
 
 export default class HomeController {
 
-    public async index({ response }: HttpContextContract) {
-        const migrator = new Migrator(Database, Application, {
-            direction: 'up',
-            dryRun: false,
-        })
-        await migrator.run()
-        const user = await User.find(1)
-        if (user) {
-            return response.redirect('/home')
-        } else {
-            await User.createMany([
-                {
-                    username: 'root', email: 'root@root.com', admin: true, active: true
-                },
-                {
-                    username: 'admin', email: 'admin@admin.com', password: 'admin@admin', admin: true, active: true
-                },
-            ])
-            await Emitente.create({ nf: 'Deskae' })
-            return response.redirect('/')
-        }
-    }
-
-    public async login({ view, response }: HttpContextContract) {
-        const migrator = new Migrator(Database, Application, {
-            direction: 'up',
-            dryRun: false,
-        })
-        await migrator.run()
-        const user = await User.find(1)
-        if (user) {
-            return view.render('login')
-        } else {
-            await User.createMany([
-                {
-                    username: 'root', email: 'root@root.com', admin: true, active: true
-                },
-                {
-                    username: 'admin', email: 'admin@admin.com', password: 'admin@admin', admin: true, active: true
-                },
-            ])
-            await Emitente.create({ nf: 'Deskae' })
-            return response.redirect('/')
-        }
-    }
-
-    public async checkLogin({ auth, request, response, session }: HttpContextContract) {
-        await request.validate(LoginUserValidator)
-        const data = request.except(['_csrf'])
-        const rememberMe = request.input('rememberMe')
-
-        try {
-            await auth.use('web').attempt(data.email, data.password, rememberMe)
-            //Remover Pasta temporaria do User
-            await Fs.rmdir(Application.tmpPath(auth.user?.id + ''), { recursive: true });
-            return response.redirect('/home')
-        } catch {
-            session.flash('alertErro', 'Os dados de acesso estão incorretos!')
-            return response.redirect('back')
-        }
-    }
-
-    public async logout({ auth, response }: HttpContextContract) {
-        //Remover Pasta temporaria do User
-        await Fs.rmdir(Application.tmpPath(auth.user?.id + ''), { recursive: true });
-        await auth.use('web').logout()
-        response.redirect('/login')
-    }
-
-    public async home({ request, view }: HttpContextContract) {
+    public async index({ request, auth, view }: HttpContextContract) {
         const activeMenu = request.url()
-        return view.render('home', { activeMenu })
+        const home = await Home.query().where({ userId: auth.user?.id }).orderBy('datetime', 'desc')
+        return view.render('home', { activeMenu, home })
+    }
+
+    public async create({ request, auth, response, session }: HttpContextContract) {
+        try {
+            const data = request.except(['_csrf', 'datetime'])
+            var datetime = request.input('datetime')
+            datetime = datetime.replace(/\T/g, ' ')
+            await Home.create({ ...data, datetime, userId: auth.user?.id })
+            session.flash({ alertSuccess: 'Cadastrado com sucesso!' })
+            return response.redirect().back()
+        } catch (error) {
+            session.flash({ alertErro: 'Erro ao cadastrar!' })
+            return response.redirect().back()
+        }
+    }
+
+    public async update({ request, response, session, params }: HttpContextContract) {
+        try {
+            const home = await Home.findOrFail(params.id)
+            const data = request.except(['_csrf'])
+            await home.merge({ ...data }).save()
+            session.flash({ alertSuccess: 'Alterado com sucesso!' })
+            return response.redirect().back()
+        } catch (error) {
+            session.flash({ alertErro: 'Erro ao alterar!' })
+            return response.redirect().back()
+        }
+    }
+
+    public async delete({ response, session, params }: HttpContextContract) {
+        try {
+            const home = await Home.findOrFail(params.id)
+            await home.delete()
+            session.flash({ alertSuccess: 'Excluido com sucesso!' })
+            return response.redirect().back()
+        } catch (error) {
+            session.flash({ alertErro: 'Erro ao excluir ou Registro em uso!' })
+            return response.redirect().back()
+        }
     }
 
 }
