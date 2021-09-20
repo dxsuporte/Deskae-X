@@ -6,6 +6,8 @@ import Path from 'path'
 import Open from 'open'
 //loading child_process
 import cp from 'child_process'
+//loading Config Dotenv
+import 'dotenv/config'
 
 //AdonisJS 5 Server
 let isProd = process.env.NODE_ENV === 'production'
@@ -16,9 +18,7 @@ async function startAdonis() {
 let tray //creating tray variable 
 
 (async () => {
-
   await startAdonis() //Start AdonisJS Server
-
   await app.whenReady().then(() => {
     //json conection .env
     const conection = {
