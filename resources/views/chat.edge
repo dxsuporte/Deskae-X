@@ -1,0 +1,65 @@
+@layout('main')
+
+@section('conternt')
+
+<a href="http://www.google.com.br" class="btn btn-primary" target="_blank"
+    onclick="window.open(this.href, 'sharegplus', 'width=1024,height=768,minWidth=800,minHeight=600,center=true,nodeIntegration=no'); return false;">dddd</a>
+
+<div class="card text-dark">
+    <form id="chat">
+        <div class="card-header">
+            <input id="" type="text" name="userId" value="{{auth.user.id}}" placeholder="Digite seu usuário">
+            <input id="" type="text" name="userOutId" placeholder="Digite seu usuário">
+        </div>
+        <div class="card-body">
+            <div class="messages"></div>
+        </div>
+        <div class="card-footer">
+            <input id="message" type="text" name="message" placeholder="Digite sua mensagem">
+            <button type="submit">Enviar</button>
+        </div>
+    </form>
+</div>
+
+<script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+<script>
+    const socket = io()
+
+    socket.on('news', (data) => {
+        console.log(data)
+        socket.emit('my other event', { my: 'data' })
+      })
+
+  function renderMessage(message) {
+      $('.messages').append('<div class="message"><strong>'+ message.userId +'</strong>: '+ message.message +'</div>')
+  }
+
+  socket.on('previousMessages', (messages) => {
+      for (messages of messages) {
+        renderMessage(messages)
+      }
+  })
+
+  $('#chat').submit((event) => {
+      event.preventDefault();
+
+      var userId = $('input[name=userId]').val();
+      var userOutId = $('input[name=userOutId]').val();
+      var message = $('input[name=message]').val();
+
+      if (userId.length && userOutId.length && message.length) {
+          var messageObject = {
+              userId: userId,
+              userOutId: userOutId,
+              message: message,
+          };
+
+          socket.emit('sendMessage', messageObject);
+          $('#message').val('');
+          renderMessage(messageObject)
+      }
+  });
+
+</script>
+
+@endsection

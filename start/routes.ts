@@ -16,6 +16,11 @@ Route.get('/logout', 'IndexController.logout')
 
 Route.group(() => {
 
+  //chat
+  Route.get('/chat', async ({ view }) => {
+    return view.render('chat')
+  })
+
   //Home
   Route.get('/home', 'HomeController.index')
   Route.post('/home/add', 'HomeController.create')
