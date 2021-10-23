@@ -23,13 +23,13 @@
     });
 
     /*--------------------------------------------------------------
-    # Alert menseger - Mensagem de alerta  
+    # Alert menseger - Mensagem de alerta
     --------------------------------------------------------------*/
     setTimeout(function () {
         $(".dx-alert").hide();
     }, 5000);
 
-    //FUNÇÃO Editor de texto Tiny 
+    //FUNÇÃO Editor de texto Tiny
     $(function () {
         tinymce.init({
             language: 'pt_BR',
@@ -41,7 +41,7 @@
     });
 
     /*--------------------------------------------------------------
-    # Modal Logout 
+    # Modal Logout
     --------------------------------------------------------------*/
     $(document).on('click', '.modalLogout', function (event) {
         $('.urlFormDefault')[0].reset();
@@ -76,7 +76,7 @@
         $(this).val(currentValue);
     });
 
-    //FUNÇÃO DE MASCARA 
+    //FUNÇÃO DE MASCARA
     $(function () {
         $('.hora').mask('00:00', { clearIfNotMatch: true });
         $('.celular').mask('(00)00000-0000', { clearIfNotMatch: true });

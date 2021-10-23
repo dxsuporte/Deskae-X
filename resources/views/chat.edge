@@ -21,45 +21,4 @@
     </form>
 </div>
 
-<script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
-<script>
-    const socket = io()
-
-    socket.on('news', (data) => {
-        console.log(data)
-        socket.emit('my other event', { my: 'data' })
-      })
-
-  function renderMessage(message) {
-      $('.messages').append('<div class="message"><strong>'+ message.userId +'</strong>: '+ message.message +'</div>')
-  }
-
-  socket.on('previousMessages', (messages) => {
-      for (messages of messages) {
-        renderMessage(messages)
-      }
-  })
-
-  $('#chat').submit((event) => {
-      event.preventDefault();
-
-      var userId = $('input[name=userId]').val();
-      var userOutId = $('input[name=userOutId]').val();
-      var message = $('input[name=message]').val();
-
-      if (userId.length && userOutId.length && message.length) {
-          var messageObject = {
-              userId: userId,
-              userOutId: userOutId,
-              message: message,
-          };
-
-          socket.emit('sendMessage', messageObject);
-          $('#message').val('');
-          renderMessage(messageObject)
-      }
-  });
-
-</script>
-
 @endsection
