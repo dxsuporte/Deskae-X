@@ -1,12 +1,14 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import Home from 'App/Models/Home'
+import User from 'App/Models/User'
 
 export default class HomeController {
 
   public async index({ auth, view }: HttpContextContract) {
     const home = await Home.query().where({ userId: auth.user?.id }).orderBy('createdAt', 'asc')
-    return view.render('home/index', { home })
+    const user = await User.query().whereRaw(`strftime('%m', created_at) = strftime('%m', date())`).orderBy('createdAt', 'asc')
+    return view.render('home/index', { home, user })
   }
 
   public async create({ request, auth, response, session }: HttpContextContract) {

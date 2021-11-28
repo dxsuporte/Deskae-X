@@ -8,6 +8,18 @@ $(() => {
 })
 
 /*--------------------------------------------------------------
+# Relógio Footer
+--------------------------------------------------------------*/
+setInterval(myTimer, 1000)
+function myTimer() {
+  var horaBrasilia = new Date(), displayDateBrasilia
+  if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+    displayDateBrasilia = horaBrasilia.toLocaleTimeString('pt-BR', { timeZone: 'America/Sao_Paulo' })
+  }
+  document.getElementById("horaBrasilia").innerHTML = displayDateBrasilia
+}
+
+/*--------------------------------------------------------------
 # FUNÇÃO TABELA
 --------------------------------------------------------------*/
 $(function () {
