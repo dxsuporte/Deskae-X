@@ -2,9 +2,8 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 export default class ClientsController {
 
-  public async index({ request, view }: HttpContextContract) {
-    const activeMenu = request.url()
-    return view.render('client/index', { activeMenu })
+  public async index({ view }: HttpContextContract) {
+    return view.render('client/index')
   }
 
   public async create({ }: HttpContextContract) {

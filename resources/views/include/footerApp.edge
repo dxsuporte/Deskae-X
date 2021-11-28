@@ -1,0 +1,49 @@
+<footer
+  class="{{auth.user ? auth.user.theme === 0 ? 'bg-light text-dark' : 'bg-dark text-light' : 'bg-dark text-light'}}">
+  <div class="container-fluid">
+    <div class="form-row">
+      <div class="mr-auto h6">
+        &copy; 2014 - {{myAno}} <strong>{{auth.user ? myEmitente.nf : ''}}</strong>
+      </div>
+      <div class="ml-auto h6">
+        <strong>Desenvolvido por</strong>
+        <a href="http://dxsuporte.com.br/" target="_blank">DX Suporte</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+@if(auth.user)
+<!-- Modal Default -->
+<div class="modal fade modalDefault" data-backdrop="static" data-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <form class="urlFormDefault" action="" method="get">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title modalTitleDefault" id="staticBackdropLabel">Modal title</h5>
+        </div>
+        <div class="modal-body modalBodyDefault">
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">OK</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+  !(function ($) {
+  "use strict";
+  $(document).on('click', '.modalExit', function (event) {
+      $('.urlFormDefault')[0].reset();
+      $(".urlFormDefault").attr('action', '/logout');
+      $('.modalTitleDefault').html('{{{lebelMenu.iconLogout}}}');
+      $('.modalBodyDefault').html('<p class="h6 text-center"> Deseja sair do sistema ? </p>');
+  });
+})(jQuery);
+</script>
+@endif

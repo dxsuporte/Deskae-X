@@ -11,14 +11,11 @@ export default class SilentAuthMiddleware {
   /**
    * Handle request
    */
-  public async handle({ request, auth }: HttpContextContract, next: () => Promise<void>) {
+  public async handle({ auth }: HttpContextContract, next: () => Promise<void>) {
 
     /*---------------------------------------------------
     # Configuração Geral
     ---------------------------------------------------*/
-    //URL do Sistema
-    const MyUrl = request.protocol() + '://' + request.headers().host
-    View.global('myUrl', MyUrl)
 
     //Ano Atual & enviar para View
     const myDia = String(new Date().getDate()).padStart(2, '0')

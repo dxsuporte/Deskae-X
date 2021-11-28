@@ -1,0 +1,50 @@
+<header class="">
+  @if(auth.user)
+  <nav
+    class="navbar navbar-expand-lg nav-menu {{auth.user.theme === 0 ? 'navbar-light bg-light' : 'navbar-dark bg-dark'}}">
+    <a class="navbar-brand" href="/" data-toggle="tooltip" data-placement="left" title="{{myEmitente.nf}}">
+      <img src="{{myEmitente.img}}" width="70" height="50" class="card-img-top" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample08"
+      aria-controls="navbarsExample08" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
+      <ul class="navbar-nav m-auto">
+        <li class="nav-item" data-toggle="tooltip" data-placement="left" title="{{lebelMenu.home}}">
+          <a class="nav-link" href="/home"><i class="icofont-ui-home"></i>
+            <b class="d-lg-none .d-xl-block">{{lebelMenu.home}}</b>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="left" title="{{lebelMenu.client}}">
+          <a class="nav-link" href="/client"><i class="icofont-address-book"></i>
+            <b class="d-lg-none .d-xl-block">{{lebelMenu.client}}</b>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="left" title="{{lebelMenu.user}}">
+          <a class="nav-link" href="/user"><i class="icofont-ui-user"></i>
+            <b class="d-lg-none .d-xl-block">{{lebelMenu.user}}</b>
+          </a>
+        </li>
+        @if(auth.user.admin)
+        <li class="nav-item" data-toggle="tooltip" data-placement="left" title="{{lebelMenu.config}}">
+          <a class="nav-link" href="/emitente"><i class="icofont-gear-alt"></i>
+            <b class="d-lg-none .d-xl-block">{{lebelMenu.config}}</b>
+          </a>
+        </li>
+        @endif
+        <li class="nav-item" data-toggle="tooltip" data-placement="left" title="{{lebelMenu.logout}}">
+          <a class="nav-link modalExit" href="" data-toggle="modal" data-target=".modalDefault">
+            <i class="icofont-exit"></i><b class="d-lg-none .d-xl-block">{{lebelMenu.logout}}</b>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="ml-auto d-none d-lg-block">
+      <a class="navbar-brand" href="/user" data-toggle="tooltip" data-placement="left" title="{{auth.user.username}}">
+        <img src="{{auth.user.img}}" width="70" height="50" class="card-img-top rounded" alt="">
+      </a>
+    </div>
+  </nav>
+  @endif
+</header>

@@ -8,13 +8,12 @@ import Fs from 'fs/promises'
 
 export default class EmitentesController {
 
-  public async index({ auth, session, response, request, view }: HttpContextContract) {
+  public async index({ auth, session, response, view }: HttpContextContract) {
     if (!auth.user?.admin) {
       session.flash({ alertErro: 'Permissão Negada!' })
       return response.redirect().back()
     }
-    const activeMenu = request.url()
-    return view.render('emitente/index', { activeMenu })
+    return view.render('emitente/index')
   }
 
   public async update({ auth, request, params, session, response }: HttpContextContract) {

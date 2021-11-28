@@ -7,6 +7,7 @@ import {
 } from '@ioc:Adonis/Lucid/Orm'
 
 export default class User extends BaseModel {
+
   @column({ isPrimary: true })
   public id: number
 
@@ -23,7 +24,10 @@ export default class User extends BaseModel {
   public rememberMeToken?: string
 
   @column()
-  public color: string
+  public theme: number
+
+  @column()
+  public primaryColor: string
 
   @column()
   public img: string

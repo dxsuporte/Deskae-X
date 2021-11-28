@@ -11,8 +11,8 @@ export default class Home extends BaseModel {
   @column()
   public title: string
 
-  @column.dateTime()
-  public datetime: DateTime
+  @column()
+  public description: string
 
   @column()
   public completed: boolean

@@ -1,0 +1,145 @@
+@layout('main')
+
+@section('conternt')
+
+<section>
+
+  <div class="form-row">
+    <div class="col-lg-6">
+      <div class="card mb-3 {{auth.user.theme === 1 ? 'bg-dark text-light' : 'bg-light text-dark'}}">
+        <div class="card-header">
+          <div class="form-row">
+            <div class="mr-auto h5 titleCenter"><i class="icofont-ui-clip-board"></i> Notas</div>
+            <div class="ml-auto h5 titleCenter">
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-outline-success btn-sm" data-toggle="modal"
+                  data-target=".modalAdd"><i class="icofont-plus-circle"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-columns">
+            @each(home in home)
+            <div class="card mb-2 border-secondary bg-secondary text-dark">
+              <div class="card-header p-1">
+                <div class="form-row">
+                  <div class="col"><b>{{home.title}}</b></div>
+                  <div class="col text-right">
+                    <button type="button" data-toggle="modal" data-target=".modalDefault"
+                      class="btn btn-sm btn-secondary modalDeleteHome" homeId={{home.id}} title="EXCLUIR">
+                      <i class="icofont-ui-delete"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body p-1" style="background-color: #fee082">
+                <p class="card-text">{{{home.description.replace(/\n/g,"<br>")}}}</p>
+              </div>
+              <div class="card-footer p-1 text-right">
+                <small>{{home.createdAt.toFormat('dd LLL yyyy') }}</small>
+              </div>
+            </div>
+            @endeach
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card mb-3 {{auth.user.theme === 1 ? 'bg-dark text-light' : 'bg-light text-dark'}}">
+        <div class="card-header">
+          <div class="form-row">
+            <div class="mr-auto h5 titleCenter"><i class="icofont-ui-calendar"></i> Aniversariantes</div>
+            <div class="ml-auto h5 titleCenter">
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-outline-success btn-sm" data-toggle="modal"
+                  data-target=".modalAdd"><i class="icofont-plus-circle"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="form-row">
+            <div class="col-xl-6">
+              <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <small> A list itemd</small>
+                  <small>14</small>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  A second list itemdddddddddddddddddddddddddddddddddddddddddd
+                  <small>2</small>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  A third list item
+                  <span class="badge badge-primary badge-pill">1</span>
+                </li>
+              </ul>
+            </div>
+            <div class="col-xl-6">
+              <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  A list item
+                  <span class="badge badge-primary badge-pill">14</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  A second list item
+                  <span class="badge badge-primary badge-pill">2</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  A third list item
+                  <span class="badge badge-primary badge-pill">1</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal ADD -->
+  <div class="modal fade modalAdd" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <form action="/home/add" method="post">
+      {{ csrfField() }}
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"><i class="icofont-plus-circle"></i> Adicionar</h5>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="title">Título</label>
+              <input id="title" type="text" name="title" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="description">Descrição</label>
+              <textarea id="description" rows="3" name="description" class="form-control" required></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary">OK</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</section>
+
+<script>
+  !(function ($) {
+    "use strict";
+    $(document).on('click', '.modalDeleteHome', function (event) {
+        $('.urlFormDefault')[0].reset();
+        $(".urlFormDefault").attr('action', '/home/' + $(this).attr('homeId') + '/delete');
+        $('.modalTitleDefault').html('<i class="icofont-ui-delete"></i> Excluir');
+        $('.modalBodyDefault').html('<p class="h6 text-center"> Tem certeza que deseja excluir esse item permanentemente? </p>');
+    });
+
+})(jQuery);
+</script>
+
+@endsection

@@ -1,41 +1,8 @@
-<!doctype html>
-<html lang="en">
+@layout('main')
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-  <meta name="description" content="Administrative System">
-  <meta name="author" content="DX Suporte - Danilo Xavier">
-  <meta name="generator" content="visual studio code">
-  <meta name="keywords" content="electron, adonisjs, nodejs, bootstrap">
-  <title>Deskae</title>
+@section('conternt')
 
-  <!-- Google Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-    rel="stylesheet">
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" type="text/css" href="{{myUrl}}/vendor/bootstrap/css/bootstrap.min.css">
-  <!-- Aos -->
-  <link rel="stylesheet" type="text/css" href="{{myUrl}}/vendor/aos/aos.css">
-  <!-- Datatable -->
-  <link rel="stylesheet" type="text/css" href="{{myUrl}}/vendor/DataTables/datatables.min.css">
-  <!-- IcoFont -->
-  <link rel="stylesheet" type="text/css" href="{{myUrl}}/vendor/icofont/icofont.min.css">
-  <!-- APP CSS -->
-  <link rel="stylesheet" type="text/css" href="{{myUrl}}/css/app.css">
-
-  <!--Jquery -->
-  <script src="{{myUrl}}/vendor/jquery/jquery.min.js"></script>
-</head>
-
-<body class="text-white bg-dark">
-
-  <!--------start navbar ----------------------->
-  @include('include/alert')
-  <!--------stop navbar ------------------------>
-
+<section>
   <div class="d-flex justify-content-center mt-5">
     <div class="h-auto d-inline-block" style="min-width: 40%;">
       <div class="card bg-dark text-white">
@@ -75,30 +42,6 @@
       </div>
     </div>
   </div>
+</section>
 
-  <footer class="mt-auto bg-dark py-3">
-    <div class="text-center">
-      <div class="ml-2">
-        Copyright &copy; {{myAno}} <strong>{{auth.user ? myEmitente.nf : ''}}.</strong>
-        <i> Desenvolvido por</i>
-        <b>dxsuporte.com.br</b>
-      </div>
-    </div>
-  </footer>
-
-  <!--Bootstrap -->
-  <script src="{{myUrl}}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- oas Files -->
-  <script src="{{myUrl}}/vendor/aos/aos.js"></script>
-  <!-- Jquery dataTables-->
-  <script src="{{myUrl}}/vendor/DataTables/datatables.min.js"></script>
-  <!-- Vendor jquery-mask Files -->
-  <script src="{{myUrl}}/vendor/jquery-mask/jquery.mask.min.js"></script>
-  <!--Tinymce-->
-  <script src="{{myUrl}}/vendor/tinymce/tinymce.min.js"></script>
-  <!--APP JS-->
-  <script src="{{myUrl}}/js/app.js"></script>
-
-</body>
-
-</html>
+@endsection

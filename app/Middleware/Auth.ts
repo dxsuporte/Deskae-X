@@ -37,10 +37,18 @@ export default class AuthMiddleware {
     const myEmitente = await Emitente.find(1)
     View.global('myEmitente', myEmitente)
 
-    const myMenu = {
+    const lebelMenu = {
+      home: 'Home',
       client: myEmitente?.type == 'health' ? 'Paciente' : 'Cliente',
+      iconclient: myEmitente?.type == 'health' ? '<i class="icofont-address-book"></i> Paciente' : '<i class="icofont-address-book"></i> Cliente',
+      user: 'Usuário',
+      iconUser: '<i class="icofont-ui-user"></i> Usuário',
+      config: 'Configuração',
+      iconConfig: '<i class="icofont-gear-alt"></i> Configuração',
+      logout: 'Sair',
+      iconLogout: '<i class="icofont-exit"></i> Sair',
     }
-    View.global('myMenu', myMenu)
+    View.global('lebelMenu', lebelMenu)
 
     const guards = customGuards.length ? customGuards : [auth.name]
     await this.authenticate(auth, guards)

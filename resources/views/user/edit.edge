@@ -2,96 +2,102 @@
 
 @section('conternt')
 
-<form action="/user/{{user.id}}/edit" method="post" enctype="multipart/form-data">
-    {{ csrfField() }}
-    <div
-        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2"><i class="icofont-ui-edit"></i> Editar</h1>
-        <div class="btn-toolbar mb-2 mb-md-0">
-            <a href="/user" title="VOLTAR" class="btn btn-outline-secondary mr-1">
-                <i class="icofont-reply"></i> voltar
-            </a>
-            <button class="btn btn-outline-primary" title="SALVAR" type="submit">
-                <i class="icofont-save"></i> Salvar
-            </button>
+<section>
+  <div class="card mb-3 {{auth.user.theme === 1 ? 'bg-dark text-light' : 'bg-light text-dark'}}">
+    <form action="/user/{{user.id}}/edit" method="post" enctype="multipart/form-data">
+      {{ csrfField() }}
+      <div class="card-header">
+        <div class="form-row">
+          <div class="mr-auto h5 titleCenter"><i class="icofont-ui-edit"></i> {{lebelMenu.user}}</div>
+          <div class="ml-auto h5 titleCenter">
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <a href="/user" title="VOLTAR" class="btn btn-outline-secondary"><i class="icofont-reply"></i></a>
+              <button class="btn btn-outline-primary" title="SALVAR" type="submit"><i class="icofont-save"></i></button>
+            </div>
+          </div>
         </div>
-    </div>
-
-    <div class="card text-white bg-dark mb-4">
-        <div class="card-body">
-            <div class="form-row">
-                <div class="form-group col-md-5">
-                    <label for="username">Nome</label>
-                    <input id="username" type="text" name="username" value="{{user.username}}"
-                        class="form-control {{flashMessages.has('errors.username') ? 'is-invalid' : ''}}" required>
-                    <div class="invalid-feedback">
-                        {{flashMessages.get('errors.username')}}
-                    </div>
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="email">Email</label>
-                    <input id="email" type="email" name="email" value="{{user.email}}"
-                        class="form-control {{flashMessages.has('errors.email') ? 'is-invalid' : ''}}" required>
-                    <div class="invalid-feedback">
-                        {{flashMessages.get('errors.email')}}
-                    </div>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="createdAt">Nascimento</label>
-                    <input id="createdAt" type="date" name="createdAt" value="{{user.createdAt.toFormat('yyyy-LL-dd')}}"
-                        class="form-control {{flashMessages.has('errors.createdAt') ? 'is-invalid' : ''}}" required>
-                    <div class="invalid-feedback">
-                        {{flashMessages.get('errors.createdAt')}}
-                    </div>
-                </div>
+      </div>
+      <div class="card-body">
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="username">Nome</label>
+            <input id="username" type="text" name="username" value="{{user.username}}"
+              class="form-control {{flashMessages.has('errors.username') ? 'is-invalid' : ''}}" required>
+            <div class="invalid-feedback">
+              {{flashMessages.get('errors.username')}}
             </div>
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                    <label for="password">Senha</label>
-                    <input id="password" type="password" name="password"
-                        class="form-control {{flashMessages.has('errors.password') ? 'is-invalid' : ''}}">
-                    <div class="invalid-feedback">
-                        {{flashMessages.get('errors.password')}}
-                    </div>
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="color">Cor</label>
-                    <input id="color" type="color" name="color" value="{{user.color}}"
-                        class="form-control {{flashMessages.has('errors.color') ? 'is-invalid' : ''}}" required>
-                    <div class="invalid-feedback">
-                        {{flashMessages.get('errors.color')}}
-                    </div>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="admin">Permissão</label>
-                    <select name="admin" class="custom-select" required>
-                        <option {{ !user.admin ? 'selected' : '' }} value="0">PADRÃO</option>
-                        <option {{ user.admin ? 'selected' : '' }} value="1">ADMIN</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="active">Situação</label>
-                    <select name="active" class="custom-select" required>
-                        <option {{ !user.active ? 'selected' : '' }} value="0">INATIVO</option>
-                        <option {{ user.active ? 'selected' : '' }} value="1">ATIVO</option>
-                    </select>
-                </div>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" value="{{user.email}}"
+              class="form-control {{flashMessages.has('errors.email') ? 'is-invalid' : ''}}" required>
+            <div class="invalid-feedback">
+              {{flashMessages.get('errors.email')}}
             </div>
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                    <label for="cover_image">Foto</label>
-                    <div class="custom-file mb-3">
-                        <input id="cover_image" type="file" name="cover_image" class="custom-file-input">
-                        <label class="custom-file-label {{flashMessages.has('errors.cover_image') ? 'is-invalid' : ''}}"
-                            for="cover_image">(612 x 612) PNG, JPG, JPEG...</label>
-                        <div class="invalid-feedback">
-                            {{flashMessages.get('errors.cover_image')}}
-                        </div>
-                    </div>
-                </div>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="createdAt">Nascimento</label>
+            <input id="createdAt" type="date" name="createdAt" value="{{user.createdAt.toFormat('yyyy-LL-dd')}}"
+              class="form-control {{flashMessages.has('errors.createdAt') ? 'is-invalid' : ''}}" required>
+            <div class="invalid-feedback">
+              {{flashMessages.get('errors.createdAt')}}
             </div>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="admin">Permissão</label>
+            <select name="admin" class="custom-select" required>
+              <option {{ user.admin ? 'selected' : '' }} value="1">ADMIN</option>
+              <option {{ !user.admin ? 'selected' : '' }} value="0">PADRÃO</option>
+            </select>
+          </div>
         </div>
-    </div>
-</form>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="password">Senha</label>
+            <input id="password" type="password" name="password"
+              class="form-control {{flashMessages.has('errors.password') ? 'is-invalid' : ''}}">
+            <div class="invalid-feedback">
+              {{flashMessages.get('errors.password')}}
+            </div>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="active">Situação</label>
+            <select name="active" class="custom-select" required>
+              <option {{ user.active ? 'selected' : '' }} value="1">ATIVO</option>
+              <option {{ !user.active ? 'selected' : '' }} value="0">INATIVO</option>
+            </select>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="theme">Tema</label>
+            <select id="theme" name="theme" class="custom-select">
+              <option {{ user.theme == 0 ? 'selected' : '' }} value="0">Claro</option>
+              <option {{ user.theme == 1 ? 'selected' : '' }} value="1">Escuro</option>
+              <option {{ user.theme == 2 ? 'selected' : '' }} value="2">Padrão</option>
+            </select>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="primaryColor">Cor</label>
+            <input id="primaryColor" type="color" name="primaryColor" value="{{user.primaryColor}}"
+              class="form-control {{flashMessages.has('errors.primaryColor') ? 'is-invalid' : ''}}" required>
+            <div class="invalid-feedback">
+              {{flashMessages.get('errors.primaryColor')}}
+            </div>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="cover_image">Foto</label>
+            <div class="custom-file mb-3">
+              <input id="cover_image" type="file" name="cover_image" class="custom-file-input">
+              <label class="custom-file-label {{flashMessages.has('errors.cover_image') ? 'is-invalid' : ''}}"
+                for="cover_image" data-browse='&#9998;'>(612 x 612) PNG, JPG, JPEG...</label>
+              <div class="invalid-feedback">
+                {{flashMessages.get('errors.cover_image')}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
 
 @endsection

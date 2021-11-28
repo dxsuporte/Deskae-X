@@ -1,0 +1,192 @@
+/*--------------------------------------------------------------
+  # Grid Template Body, Header, Main, Footer
+--------------------------------------------------------------*/
+
+body {
+  font-family: sans-serif;
+  height: 100vh;
+  margin: 0;
+}
+
+.body {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.3fr 3.5fr 0.1fr [footer];
+  grid-auto-flow: row;
+  grid-template-areas: "header" "main" "footer";
+}
+
+header {
+  grid-area: header;
+  line-height: 50px;
+}
+
+main {
+  grid-area: main;
+  grid-gap: 1rem;
+  padding: 1rem;
+  position: relative;
+  overflow-y: auto;
+  background-color: rgba(22, 21, 26, 0.534);
+}
+
+footer {
+  grid-area: footer;
+  padding-top: 0.5rem;
+}
+
+/*--------------------------------------------------------------
+ # Links
+--------------------------------------------------------------*/
+
+a {
+  color: var(--theme);
+}
+
+a:hover {
+  color: var(--primaryColor);
+  transition: all .3s ease-in-out;
+  text-decoration: none;
+}
+
+/*--------------------------------------------------------------
+  # Button theme - Botão do Tema
+  --------------------------------------------------------------*/
+
+.btn-outline-theme {
+  transition: all 0.5s;
+  color: var(--primaryColor);
+  border-color: var(--primaryColor);
+}
+
+.btn-outline-theme:hover {
+  color: var(--theme);
+  background-color: var(--primaryColor);
+  border-color: var(--primaryColor);
+}
+
+.btn-outline-theme:not(:disabled):not(.disabled):active, .btn-outline-theme:not(:disabled):not(.disabled).active, .show>.btn-outline-theme.dropdown-toggle {
+  color: var(--theme);
+  background-color: var(--primaryColor);
+  border-color: var(--primaryColor);
+}
+
+/*--------------------------------------------------------------
+  # Button Bootstrap-select
+  --------------------------------------------------------------*/
+
+.bootstrap-select .btn {
+  border: 1px solid;
+}
+
+.bootstrap-select ul.dropdown-menu>li>a, ul ul ul.dropdown-menu li {
+  color: var(--theme);
+}
+
+.bootstrap-select ul.dropdown-menu>li>a:hover, ul ul ul.dropdown-menu li {
+  color: var(--primaryColor);
+}
+
+.bootstrap-select .dropdown-menu {
+  background-color: var(--dropdown);
+}
+
+/*--------------------------------------------------------------
+  # Navigation Menu
+---------------------------------------------------------------*/
+
+.navbar .navbar-toggler {
+  top: .25rem;
+  right: 1rem;
+  color: var(--primaryColor);
+}
+
+.navbar-toggler:hover {
+  border-color: var(--primaryColor);
+}
+
+.nav-menu a {
+  font-size: 30px;
+  text-transform: capitalize;
+}
+
+@media (max-width: 991px) {
+  .nav-menu a {
+    font-size: 16px;
+  }
+}
+
+.nav-menu ul.dropdown-menu>li>a, .navbar ul ul ul.dropdown-menu li .nav-link {
+  font-size: 14px;
+  line-height: 22px;
+  display: block;
+  position: relative;
+  z-index: 1;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: var(--theme);
+  text-transform: uppercase;
+}
+
+.nav-menu ul.dropdown-menu>li>a:hover, .navbar ul ul ul.dropdown-menu li .nav-link:hover {
+  color: var(--primaryColor);
+}
+
+.nav-menu .dropdown-item:focus, .dropdown-item:hover {
+  color: var(--theme);
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.nav-menu .dropdown-menu {
+  margin: 11px;
+  background-color: var(--dropdown);
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.5);
+  padding: 5px;
+  border: 5px;
+  /* visibility: hidden; */
+}
+
+.nav-menu .dropdown:hover .dropdown-menu {
+  /* opacity: 1;
+    visibility: visible;
+    display: block;*/
+  -webkit-transform: scaleY(1);
+  -moz-transform: scaleY(1);
+  -ms-transform: scaleY(1);
+  -o-transform: scaleY(1);
+}
+
+.nav-menu li {
+  position: relative;
+  padding: 0px 3px 0px 3px;
+}
+
+.nav-menu li:after {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  content: '';
+  background-color: var(--primaryColor);
+  opacity: 0;
+  z-index: 1 !important;
+}
+
+.nav-menu li:hover:after {
+  opacity: 1;
+}
+
+/*--------------------------------------------------------------
+  # section
+--------------------------------------------------------------*/
+
+section .titleCenter {
+  line-height: 30px !important;
+}

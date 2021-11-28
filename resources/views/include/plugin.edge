@@ -1,0 +1,23 @@
+<!--===============Inicio loading =============-->
+<div class="loading"></div>
+<!--===============Fim loading ================-->
+
+@if(flashMessages.has('alertSuccess'))
+<!--===============Inicio Toasts Alerts=============-->
+<div class="toastsAlerts alert alert-success alert-dismissible fade show" role="alert" data-aos="fade-down">
+  {{flashMessages.get('alertSuccess')}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+@endif
+
+@if(flashMessages.has('alertErro'))
+<div class="toastsAlerts alert alert-danger alert-dismissible fade show" role="alert" data-aos="fade-down">
+  {{flashMessages.get('alertErro')}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<!--===============Fim Toasts Alerts================-->
+@endif

@@ -1,19 +1,6 @@
 /*--------------------------------------------------------------
-  # Alert menseger - Mensagem de alerta  
+  # Loading Site - Carregando Site
 --------------------------------------------------------------*/
-
-.dx-alert {
-  position: absolute;
-  top: 20px;
-  right: 0.5%;
-  box-shadow: 2px 2px 15px rgba(0, 0, 0, 1.0);
-  z-index: 1032 !important;
-  font-size: 15px;
-}
-
-/*--------------------------------------------------------------
-  # Loading 
----------------------------------------------------------------*/
 
 .loading {
   position: fixed;
@@ -23,7 +10,7 @@
   bottom: 0;
   z-index: 9999 !important;
   overflow: hidden;
-  background: rgba(0, 0, 0, 1.0);
+  background: rgba(0, 0, 0, 0.980);
 }
 
 .loading:before {
@@ -32,7 +19,7 @@
   top: calc(50% - 30px);
   left: calc(50% - 30px);
   border: 6px solid var(--primaryColor);
-  border-top-color: rgba(0, 0, 0, 1.0);
+  border-top-color: #a9cccf94;
   border-radius: 50%;
   width: 60px;
   height: 60px;
@@ -59,90 +46,16 @@
 }
 
 /*--------------------------------------------------------------
- # Links
+  # Toasts Alerts
 --------------------------------------------------------------*/
 
-a {
-  color: #f8f9fa;
-}
-
-a:hover {
-  color: var(--primaryColor);
-  text-decoration: none;
-}
-
-/*--------------------------------------------------------------
- # Sidebar
----------------------------------------------------------------*/
-
-.sidebar {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 100;
-  padding: 48px 0 0;
-}
-
-@media (max-width: 767.98px) {
-  .sidebar {
-    top: 30px;
-  }
-}
-
-.sidebar .nav-link.active {
-  color: var(--primaryColor);
-}
-
-/*--------------------------------------------------------------
-  # Navigation Menu
----------------------------------------------------------------*/
-
-.navbar .navbar-toggler {
-  top: .25rem;
-  right: 1rem;
-}
-
-.navbar-toggler:hover {
-  border-color: var(--primaryColor);
-}
-
-.nav-menu li {
-  position: relative;
-}
-
-.nav-menu li:after {
+.toastsAlerts {
   position: absolute;
-  width: 100%;
-  height: 2px;
-  content: '';
-  background-color: var(--primaryColor);
-  opacity: 0;
-  z-index: 1 !important;
-}
-
-.nav-menu li:hover:after {
-  opacity: 1;
-}
-
-/*--------------------------------------------------------------
-  # Footer 
----------------------------------------------------------------*/
-
-footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  z-index: 3;
-}
-
-footer .copyright {
-  margin-left: 18%;
-}
-
-@media (max-width: 984px) {
-  footer .copyright {
-    margin-left: 0;
-    text-align: center;
-  }
+  min-width: 200px;
+  max-width: 400px;
+  top: 25px;
+  right: 10px;
+  word-break: break-all;
+  z-index: 1032 !important;
+  animation-delay: -1500ms;
 }
