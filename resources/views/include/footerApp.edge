@@ -39,13 +39,13 @@
 
 <script>
   !(function ($) {
-  "use strict";
+  "use strict"
   $(document).on('click', '.modalExit', function (event) {
-      $('.urlFormDefault')[0].reset();
-      $(".urlFormDefault").attr('action', '/logout');
-      $('.modalTitleDefault').html('{{{lebelMenu.iconLogout}}}');
-      $('.modalBodyDefault').html('<p class="h6 text-center"> Deseja sair do sistema ? </p>');
-  });
+      $('.urlFormDefault')[0].reset()
+      $(".urlFormDefault").attr('action', '/logout')
+      $('.modalTitleDefault').html('{{{lebelMenu.iconLogout}}}')
+      $('.modalBodyDefault').html('<p class="h6 text-center"> Deseja sair do sistema ? </p>')
+  })
 })(jQuery);
 </script>
 @endif

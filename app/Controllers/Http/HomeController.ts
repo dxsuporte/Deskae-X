@@ -7,7 +7,7 @@ export default class HomeController {
 
   public async index({ auth, view }: HttpContextContract) {
     const home = await Home.query().where({ userId: auth.user?.id }).orderBy('createdAt', 'asc')
-    const user = await User.query().whereRaw(`strftime('%m', created_at) = strftime('%m', date())`).orderBy('createdAt', 'asc')
+    const user = await User.query().where('id', '!=', 1).where('id', '!=', 2).whereRaw(`strftime('%m', created_at) = strftime('%m', date())`).orderBy('createdAt', 'asc')
     return view.render('home/index', { home, user })
   }
 
