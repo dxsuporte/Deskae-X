@@ -49,7 +49,7 @@ export default class HomeController {
                     username: 'root', email: 'root@root.com', admin: true, active: true
                 },
                 {
-                    username: 'admin', email: 'admin@admin.com', password: 'admin@admin', admin: true, active: true
+                  username: 'admin', email: 'admin@admin.com', password: 'admin@123', admin: true, active: true
                 },
             ])
             await Emitente.create({ nf: 'Deskae' })

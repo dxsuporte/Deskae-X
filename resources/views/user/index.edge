@@ -22,6 +22,7 @@
           class="table table-bordered table-sm table-hover text-center dataTable {{auth.user.theme === 1 ? 'table-dark' : ''}}">
           <thead class="{{auth.user.theme === 1 ? 'thead-dark' : 'thead-light'}}">
             <tr>
+              <th scope="col"></th>
               <th scope="col">Nome</th>
               <th scope="col">Email</th>
               <th scope="col">Nacimento</th>
@@ -32,6 +33,11 @@
           <tbody>
             @each(user in user)
             <tr>
+              <td class="align-middle">
+                <a href="{{user.img}}" title="{{user.username}}" class="venobox" data-gall="gallery-carousel">
+                  <img src="{{user.img}}" class="mr-2 rounded" width="32" height="32" alt="...">
+                </a>
+              </td>
               <td class="align-middle" scope="row">{{user.username}}</td>
               <td class="align-middle">{{user.email}}</td>
               <td class="align-middle">{{user.createdAt.toFormat('dd/LL/yyyy') }}</td>
@@ -45,13 +51,15 @@
                 @endif
               </td>
               <td class="align-middle">
-                <a href="/user/{{user.id}}/edit" class="btn btn-outline-primary" title="EDITAR">
-                  <i class="icofont-ui-edit"></i>
-                </a>
-                <button type="button" data-toggle="modal" data-target=".modalDefault"
-                  class="btn btn-outline-danger modalDeleteUser" userId={{user.id}} title="EXCLUIR">
-                  <i class="icofont-ui-delete"></i>
-                </button>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                  <a href="/user/{{user.id}}/edit" class="btn btn-outline-primary" title="EDITAR">
+                    <i class="icofont-ui-edit"></i>
+                  </a>
+                  <button type="button" data-toggle="modal" data-target=".modalDefault"
+                    class="btn btn-outline-danger modalDeleteUser" userId={{user.id}} title="EXCLUIR">
+                    <i class="icofont-ui-delete"></i>
+                  </button>
+                </div>
               </td>
             </tr>
             @endeach

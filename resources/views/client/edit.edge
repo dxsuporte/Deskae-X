@@ -1,0 +1,226 @@
+@layout('main')
+
+@section('conternt')
+
+<section>
+  <form action="/client/{{client.id}}/edit" method="post">
+    {{ csrfField() }}
+    <div class="card mb-3 {{auth.user.theme === 1 ? 'bg-dark text-light' : 'bg-light text-dark'}}">
+      <div class="card-header">
+        <div class="form-row">
+          <div class="mr-auto h5 titleCenter"><i class="icofont-ui-edit"></i> {{lebelMenu.client}}</div>
+          <div class="ml-auto h5 titleCenter">
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <a href="/client" title="CANCELAR" class="btn btn-outline-secondary"><i class="icofont-reply"></i></a>
+              <button type="submit" title="SALVAR" class="btn btn-outline-primary"><i class="icofont-save"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="form-row border-bottom border-gray pb-1 mb-2">
+          <div class="mr-auto">
+            <h5><b>Indentificação</b></h5>
+          </div>
+          <div class="ml-auto">
+            <select name="active" class="custom-select">
+              <option {{ !client.active ? 'selected' : '' }} value="0">INATIVO</option>
+              <option {{ client.active ? 'selected' : '' }} value="1">ATIVO</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-lg-4">
+            <label for="nf">Nome</label>
+            <input id="nf" type="text" name="nf" value="{{client.nf}}" placeholder="Nome Completo..."
+              class="form-control {{flashMessages.has('errors.nf') ? 'is-invalid' : ''}}">
+            <div class="invalid-feedback">
+              {{flashMessages.get('errors.nf')}}
+            </div>
+          </div>
+          <div class="form-group col-lg-2">
+            <label for="cpf">CPF</label>
+            <input id="cpf" type="text" name="cpf" value="{{client.cpf}}" required
+              class="form-control cpf {{flashMessages.has('errors.cpf') ? 'is-invalid' : ''}}">
+            <div class="invalid-feedback">
+              {{flashMessages.get('errors.cpf')}}
+            </div>
+          </div>
+          <div class="form-group col-lg-2">
+            <label for="rg">RG</label>
+            <input id="rg" type="text" name="rg" value="{{client.rg || ''}}" placeholder="Nº, Emissor e UF..."
+              class="form-control">
+          </div>
+          <div class="form-group col-lg-2">
+            <label for="sus">Nº SUS</label>
+            <input id="sus" type="text" name="sus" value="{{client.sus || ''}}" placeholder="Nº cartão SUS..."
+              class="form-control">
+          </div>
+          <div class="form-group col-lg-2">
+            <label for="nascimento">Nascimento</label>
+            <input id="nascimento" type="date" name="nascimento"
+              value="{{client.nascimento ? client.nascimento.toFormat('yyyy-LL-dd') : ''}}" class="form-control">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-lg-2">
+            <label for="sexo">Sexo</label>
+            <select id="sexo" name="sexo" class="custom-select form-control">
+              <option value=""></option>
+              <option {{ client.sexo == 'Feminino' ? 'selected' : '' }} value="Feminino">Feminino
+              </option>
+              <option {{ client.sexo == 'Masculino' ? 'selected' : '' }} value="Masculino">
+                Masculino</option>
+            </select>
+          </div>
+          <div class="form-group col-lg-4">
+            <label for="email">E-mail</label>
+            <input id="email" type="email" name="email" value="{{client.email}}" required
+              class="form-control textM {{flashMessages.has('errors.email') ? 'is-invalid' : ''}}">
+            <div class="invalid-feedback">
+              {{flashMessages.get('errors.email')}}
+            </div>
+          </div>
+          <div class="form-group col-lg-2">
+            <label for="celular">Celular</label>
+            <input id="celular" type="text" name="celular" value="{{client.celular || ''}}"
+              class="form-control celular">
+          </div>
+          <div class="form-group col-lg-2">
+            <label for="telefone">Telefone</label>
+            <input id="telefone" type="text" name="telefone" value="{{client.telefone || ''}}"
+              class="form-control telefone">
+          </div>
+          <div class="form-group col-lg-2">
+            <label for="cep">CEP</label>
+            <input id="cep" type="text" name="cep" value="{{client.cep || ''}}" class="form-control cep">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-lg-3">
+            <label for="rua">Endereço</label>
+            <input id="rua" type="text" name="rua" value="{{client.rua || ''}}" class="form-control text">
+          </div>
+          <div class="form-group col-lg-3">
+            <label for="bairro">Bairro</label>
+            <input id="bairro" type="text" name="bairro" value="{{client.bairro || ''}}" class="form-control text">
+          </div>
+          <div class="form-group col-lg-2">
+            <label for="cidade">Cidade</label>
+            <input id="cidade" type="text" name="cidade" value="{{client.cidade || ''}}" class="form-control text">
+          </div>
+          <div class="form-group col-lg-2">
+            <label for="estado">Estado</label>
+            <select id="estado" name="estado" class="custom-select form-control">
+              <option value=""></option>
+              <option {{ client.estado=='AC' ? 'selected' : '' }} value="AC">Acre
+              </option>
+              <option {{ client.estado=='AL' ? 'selected' : '' }} value="AL">Alagoas
+              </option>
+              <option {{ client.estado=='AP' ? 'selected' : '' }} value="AP">Amapá
+              </option>
+              <option {{ client.estado=='AM' ? 'selected' : '' }} value="AM">Amazonas
+              </option>
+              <option {{ client.estado=='BA' ? 'selected' : '' }} value="BA">Bahia
+              </option>
+              <option {{ client.estado=='CE' ? 'selected' : '' }} value="CE">Ceará
+              </option>
+              <option {{ client.estado=='DF' ? 'selected' : '' }} value="DF">Distrito
+                Federal
+              </option>
+              <option {{ client.estado=='ES' ? 'selected' : '' }} value="ES">Espírito
+                Santo
+              </option>
+              <option {{ client.estado=='GO' ? 'selected' : '' }} value="GO">Goiás
+              </option>
+              <option {{ client.estado=='MA' ? 'selected' : '' }} value="MA">Maranhão
+              </option>
+              <option {{ client.estado=='MT' ? 'selected' : '' }} value="MT">Mato Grosso
+              </option>
+              <option {{ client.estado=='MS' ? 'selected' : '' }} value="MS">Mato Grosso
+                do
+                Sul
+              </option>
+              <option {{ client.estado=='MG' ? 'selected' : '' }} value="MG">Minas
+                Gerais
+              </option>
+              <option {{ client.estado=='PA' ? 'selected' : '' }} value="PA">Pará
+              </option>
+              <option {{ client.estado=='PB' ? 'selected' : '' }} value="PB">Paraíba
+              </option>
+              <option {{ client.estado=='PR' ? 'selected' : '' }} value="PR">Paraná
+              </option>
+              <option {{ client.estado=='PE' ? 'selected' : '' }} value="PE">Pernambuco
+              </option>
+              <option {{ client.estado=='PI' ? 'selected' : '' }} value="PI">Piauí
+              </option>
+              <option {{ client.estado=='RJ' ? 'selected' : '' }} value="RJ">Rio de
+                Janeiro
+              </option>
+              <option {{ client.estado=='RN' ? 'selected' : '' }} value="RN">Rio Grande
+                do
+                Norte
+              </option>
+              <option {{ client.estado=='RS' ? 'selected' : '' }} value="RS">Rio Grande
+                do
+                Sul
+              </option>
+              <option {{ client.estado=='RO' ? 'selected' : '' }} value="RO">Rondônia
+              </option>
+              <option {{ client.estado=='RR' ? 'selected' : '' }} value="RR">Rorâima
+              </option>
+              <option {{ client.estado=='SC' ? 'selected' : '' }} value="SC">Santa
+                Catarina
+              </option>
+              <option {{ client.estado=='SP' ? 'selected' : '' }} value="SP">São Paulo
+              </option>
+              <option {{ client.estado=='SE' ? 'selected' : '' }} value="SE">Sergipe
+              </option>
+              <option {{ client.estado=='TO' ? 'selected' : '' }} value="TO">Tocantins
+              </option>
+            </select>
+          </div>
+          <div class="form-group col-lg-2">
+            <label for="complemento">Complemento</label>
+            <input id="complemento" type="text" name="complemento" value="{{client.complemento || ''}}"
+              class="form-control text">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-lg-4">
+            <label for="mae">Nome da Mãe</label>
+            <input id="mae" type="text" name="mae" value="{{client.mae || ''}}" class="form-control text">
+          </div>
+          <div class="form-group col-lg-4">
+            <label for="pai">Nome do Pai</label>
+            <input id="pai" type="text" name="pai" value="{{client.pai || ''}}" class="form-control text">
+          </div>
+          <div class="form-group col-lg-4">
+            <label for="conjuge">Nome do Cônjuge</label>
+            <input id="conjuge" type="text" name="conjuge" value="{{client.conjuge || ''}}" class="form-control text">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-lg-2">
+            <label for="beneficioPublico">Benefício Público</label>
+            <select id="beneficioPublico" name="beneficioPublico" class="custom-select form-control">
+              <option value=""></option>
+              <option {{ client.beneficioPublico == 'Bolsa Família' ? 'selected' : '' }} value="Bolsa Família">Bolsa
+                Família</option>
+              <option {{ client.beneficioPublico == 'BPC - Benefício de Prestação Continuada' ? 'selected' : '' }}
+                value="BPC - Benefício de Prestação Continuada">BPC - Benefício de Prestação Continuada</option>
+              <option {{ client.beneficioPublico == 'Outro Benefício Público' ? 'selected' : '' }}
+                value="Outro Benefício Público">Outro Benefício Público</option>
+            </select>
+          </div>
+          <div class="form-group col-lg-3">
+            <label for="projetoSocial"></label>
+            <input id="projetoSocial" type="text" name="projetoSocial" value="{{client.projetoSocial || ''}}" class="form-control text">
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>
+
+@endsection

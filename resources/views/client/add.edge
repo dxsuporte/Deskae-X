@@ -1,0 +1,61 @@
+@layout('main')
+
+@section('conternt')
+
+<section>
+  <form action="/client/add" method="post">
+    {{ csrfField() }}
+    <div class="card mb-3 {{auth.user.theme === 1 ? 'bg-dark text-light' : 'bg-light text-dark'}}">
+      <div class="card-header">
+        <div class="form-row">
+          <div class="mr-auto h5 titleCenter"><i class="icofont-plus-circle"></i> {{lebelMenu.client}}</div>
+          <div class="ml-auto h5 titleCenter">
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <a href="/client" title="CANCELAR" class="btn btn-outline-secondary"><i class="icofont-reply"></i></a>
+              <button type="submit" title="SALVAR" class="btn btn-outline-primary"><i class="icofont-save"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="form-row">
+          <div class="form-group col-lg-3">
+            <label for="nf">Nome</label>
+            <input id="nf" type="text" name="nf" value="{{flashMessages.get('nf') || ''}}"
+              placeholder="Nome Completo..." required
+              class="form-control {{flashMessages.has('errors.nf') ? 'is-invalid' : ''}}">
+            <div class="invalid-feedback">
+              {{flashMessages.get('errors.nf')}}
+            </div>
+          </div>
+          <div class="form-group col-lg-3">
+            <label for="cpf">CPF</label>
+            <input id="cpf" type="text" name="cpf" value="{{flashMessages.get('cpf') || ''}}" required
+              class="form-control cpf {{flashMessages.has('errors.cpf') ? 'is-invalid' : ''}}">
+            <div class="invalid-feedback">
+              {{flashMessages.get('errors.cpf')}}
+            </div>
+          </div>
+          <div class="form-group col-lg-3">
+            <label for="email">E-mail</label>
+            <input id="email" type="email" name="email" value="{{flashMessages.get('email') || ''}}" required
+              class="form-control {{flashMessages.has('errors.email') ? 'is-invalid' : ''}}">
+            <div class="invalid-feedback">
+              {{flashMessages.get('errors.email')}}
+            </div>
+          </div>
+          <div class="form-group col-lg-3">
+            <label for="celular">Celular</label>
+            <input id="celular" type="text" name="celular" value="{{flashMessages.get('celular') || ''}}" required
+              class="form-control celular {{flashMessages.has('errors.celular') ? 'is-invalid' : ''}}">
+            <div class="invalid-feedback">
+              {{flashMessages.get('errors.celular')}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>
+
+@endsection

@@ -24,7 +24,8 @@ Route.group(() => {
 
   //Client
   Route.get('/client', 'ClientsController.index')
-  Route.get('/client/add', 'ClientsController.create')
+  Route.get('/client/add', 'ClientsController.add')
+  Route.post('/client/add', 'ClientsController.create')
   Route.get('/client/:id/edit', 'ClientsController.edit')
   Route.post('/client/:id/edit', 'ClientsController.update')
   Route.get('/client/:id/delete', 'ClientsController.delete')

@@ -9,8 +9,15 @@
         <div class="mr-auto h5 titleCenter">{{{lebelMenu.iconclient}}}</div>
         <div class="ml-auto h5 titleCenter">
           <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" title="ADICIONAR" class="btn btn-outline-success modalAddUser" data-toggle="modal"
-              data-target=".modalDefault"><i class="icofont-plus-circle"></i></button>
+            <form action="/client" method="get">
+              <select onchange="this.form.submit()" name="status" title="Status" class="custom-select form-control">
+                <option {{ status=='' ? 'selected' : '' }} value="">Todos</option>
+                <option {{ status=='>' ? 'selected' : '' }} value=">">Ativo</option>
+                <option {{ status=='=' ? 'selected' : '' }} value="=">Inativo</option>
+              </select>
+            </form>
+            <a href="/client/add" title="ADICIONAR" class="btn btn-outline-success"><i
+                class="icofont-plus-circle"></i></a>
           </div>
         </div>
       </div>
@@ -21,36 +28,51 @@
           class="table table-bordered table-sm table-hover text-center dataTable {{auth.user.theme === 1 ? 'table-dark' : ''}}">
           <thead class="{{auth.user.theme === 1 ? 'thead-dark' : 'thead-light'}}">
             <tr>
-              <th scope="col">Nome</th>
-              <th scope="col">Email</th>
-              <th scope="col">Nacimento</th>
+              <th scope="col"></th>
+              <th scope="col">{{lebelMenu.client}}</th>
+              <th scope="col">Contato</th>
+              <th scope="col">Documento</th>
               <th scope="col">Situação</th>
-              <th scope="col">Acões</th>
+              <th scope="col">Ações</th>
             </tr>
           </thead>
           <tbody>
-            @each(user in user)
-            <tr>
-              <td class="align-middle" scope="row">{{user.username}}</td>
-              <td class="align-middle">{{user.email}}</td>
-              <td class="align-middle">{{user.createdAt.toFormat('dd/LL/yyyy') }}</td>
+            @each(client in client)
+            <tr class="text-center">
               <td class="align-middle">
-                @if(user.active)
-                <span class="badge badge-success">ATIVO</span><br>
-                {{{ user.admin ? '<span class="badge badge-primary">ADMIN</span>' : '<span class="badge badge-info">PADRÃO</span>' }}}
+                <a href="{{client.img}}" title="{{client.nf}}" class="venobox" data-gall="gallery-carousel">
+                  <img src="{{client.img}}" class="mr-2 rounded" width="32" height="32" alt="...">
+                </a>
+              </td>
+              <th scope="row" class="align-middle">
+                <span class="h6">{{client.nf}}</span>
+                <small><br>{{client.rs || ''}}</small>
+              </th>
+              <td class="align-middle">
+                {{client.email}}
+                <small><br>{{client.telefone || ''}} {{client.celular || ''}}</small>
+              </td>
+              <td class="align-middle">
+                <span class="h6">{{client.cpf}}</span>
+              </td>
+              <td class="align-middle text-center">
+                @if(client.active)
+                <span class="badge badge-success">ATIVO</span>
                 @else
-                <span class="badge badge-danger">INATIVO</span><br>
-                {{{ user.admin ? '<span class="badge badge-primary">ADMIN</span>' : '<span class="badge badge-info">PADRÃO</span>' }}}
+                <span class="badge badge-danger">INATIVO</span>
                 @endif
               </td>
               <td class="align-middle">
-                <a href="/user/{{user.id}}/edit" class="btn btn-outline-primary" title="EDITAR">
-                  <i class="icofont-ui-edit"></i>
-                </a>
-                <button type="button" data-toggle="modal" data-target=".modalDefault"
-                  class="btn btn-outline-danger modalDeleteUser" userId={{user.id}} title="EXCLUIR">
-                  <i class="icofont-ui-delete"></i>
-                </button>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                  <a href="/client/{{client.id}}/view" class="btn btn-outline-secondary" title="VISUALIZAR"><i
+                      class="icofont-eye-alt"></i></a>
+                  <a href="/client/{{client.id}}/edit" class="btn btn-outline-primary" title="EDITAR"><i
+                      class="icofont-ui-edit"></i></a>
+                  <button type="button" data-toggle="modal" data-target=".modalDefault"
+                    class="btn btn-outline-danger modalDelete" userId={{client.id}} title="EXCLUIR">
+                    <i class="icofont-ui-delete"></i>
+                  </button>
+                </div>
               </td>
             </tr>
             @endeach
@@ -64,9 +86,9 @@
 <script>
   !(function ($) {
   "use strict";
-  $(document).on('click', '.modalDeleteUser', function (event) {
+  $(document).on('click', '.modalDelete', function (event) {
       $('.urlFormDefault')[0].reset();
-      $(".urlFormDefault").attr('action', '/user/' + $(this).attr('userId') + '/delete');
+      $(".urlFormDefault").attr('action', '/client/' + $(this).attr('userId') + '/delete');
       $('.modalTitleDefault').html('<i class="icofont-ui-delete"></i> Excluir');
       $('.modalBodyDefault').html('<p class="h6 text-center"> Tem certeza que deseja excluir esse item permanentemente? </p>');
   });
