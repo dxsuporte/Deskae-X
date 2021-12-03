@@ -12,7 +12,7 @@ export default class CreateUserValidator {
     type: schema.string({ trim: true }),
     cover_image: schema.file.optional({
       size: '2mb',
-      extnames: ['jpg', 'gif', 'png'],
+      extnames: ['jpg', 'jpeg', 'png', 'svg', 'ico'],
     }),
   })
 
