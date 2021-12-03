@@ -1,20 +1,3 @@
-<footer
-  class="{{auth.user ? auth.user.theme === 0 ? 'bg-light text-dark' : 'bg-dark text-light' : 'bg-dark text-light'}}">
-  <div class="container-fluid">
-    <div class="form-row">
-      <div class="mr-auto h6">
-        &copy; <strong>{{auth.user ? myEmitente.nf : ''}}</strong> - {{myDia}} de {{myMesEx}} de {{myAno}}
-      </div>
-      <div class="h6">
-        <strong id="horaBrasilia" data-toggle="tooltip" data-placement="top" title="Horário de Brasília"></strong>
-      </div>
-      <div class="ml-auto h6">
-        Desenvolvido por <a href="http://dxsuporte.com.br/" target="_blank"><b>DX Suporte</b></a>
-      </div>
-    </div>
-  </div>
-</footer>
-
 @if(auth.user)
 <!-- Modal Default -->
 <div class="modal fade modalDefault" data-backdrop="static" data-keyboard="false" tabindex="-1"

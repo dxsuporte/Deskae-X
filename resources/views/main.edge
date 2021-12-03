@@ -3,7 +3,7 @@
 
 @if(auth.user)
 <!--------start Theme ----------------------->
-@include('include/themeApp')
+@include('include/theme')
 <!--------stop Theme ------------------------>
 @endif
 
@@ -52,7 +52,7 @@
     <!--====Fim loading Toasts Alerts================-->
 
     <!--------start Header ----------------------->
-    @include('include/headerApp')
+    @include('include/header')
     <!--------End Header ------------------------>
 
     <!--------start main ------------------------>
@@ -61,8 +61,12 @@
     </main>
     <!--------stop main ------------------------>
 
+    <!--------start modal ----------------------->
+    @include('include/modal')
+    <!--------stop modal ------------------------>
+
     <!--------start footer ----------------------->
-    @include('include/footerApp')
+    @include('include/footer')
     <!--------stop footer ------------------------>
 
   </div>
