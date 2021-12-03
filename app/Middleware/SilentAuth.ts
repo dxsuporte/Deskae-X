@@ -21,7 +21,7 @@ export default class SilentAuthMiddleware {
     const date = new Date();
     const myDia = String(new Date().getDate()).padStart(2, '0')
     const myMes = String(new Date().getMonth() + 1).padStart(2, '0')
-    const myMesEx = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"][date.getMonth()];
+    const myMesEx = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"][date.getMonth()]
     const myAno = new Date().getFullYear()
     const myData = myDia + '/' + myMes + '/' + myAno
 

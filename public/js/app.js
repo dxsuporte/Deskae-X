@@ -7,17 +7,17 @@ function aos_init() {
   AOS.init({
     duration: 1000,
     once: true
-  });
+  })
 }
 $(window).on('load', () => {
-  aos_init();
-});
+  aos_init()
+})
 
 $(window).on('load', () => {
   if ($('.loading').length) {
-    $('.loading').delay(100).fadeOut('slow', () => {
+    $('.loading').delay(1000).fadeOut('slow', () => {
       $(this).remove()
-    });
+    })
   }
 })
 
@@ -32,7 +32,7 @@ setTimeout(() => {
 # Initiate venobox lightbox - Galeria de Imagem
 --------------------------------------------------------------*/
 $(document).ready(() => {
-  $('.venobox').venobox();
+  $('.venobox').venobox()
 })
 
 /*--------------------------------------------------------------
@@ -40,39 +40,49 @@ $(document).ready(() => {
 --------------------------------------------------------------*/
 $(".cpfcnpj").keydown(function () {
   try {
-    $(".cpfcnpj").unmask();
+    $(".cpfcnpj").unmask()
   } catch (e) { }
 
-  var tamanho = $(".cpfcnpj").val().length;
+  var tamanho = $(".cpfcnpj").val().length
 
   if (tamanho < 11) {
-    $(".cpfcnpj").mask("999.999.999-99");
+    $(".cpfcnpj").mask("999.999.999-99")
   } else {
-    $(".cpfcnpj").mask("99.999.999/9999-99");
+    $(".cpfcnpj").mask("99.999.999/9999-99")
   }
 
   // ajustando foco
-  var elem = this;
+  var elem = this
   setTimeout(function () {
     // mudo a posição do seletor
-    elem.selectionStart = elem.selectionEnd = 10000;
-  }, 0);
+    elem.selectionStart = elem.selectionEnd = 10000
+  }, 0)
   // reaplico o valor para mudar o foco
-  var currentValue = $(this).val();
-  $(this).val('');
-  $(this).val(currentValue);
-});
+  var currentValue = $(this).val()
+  $(this).val('')
+  $(this).val(currentValue)
+})
 
 /*--------------------------------------------------------------
 # FUNÇÃO DE MASCARA IMPUT
 --------------------------------------------------------------*/
 $(function () {
-  $('.hora').mask('00:00', { clearIfNotMatch: true });
-  $('.celular').mask('(00)00000-0000', { clearIfNotMatch: true });
-  $('.telefone').mask('(00)0000-0000', { clearIfNotMatch: true });
-  $('.cep').mask('00.000-000', { clearIfNotMatch: true });
-  $(".cpf").mask("000.000.000-00", { clearIfNotMatch: true });
-  $(".cnpj").mask("00.000.000/0000-00", { clearIfNotMatch: true });
-  $('.money').mask('00.000.000,00', { reverse: true });
-  $('.percent').mask('000.00', { reverse: true });
-});
+  $('.hora').mask('00:00', { clearIfNotMatch: true })
+  $('.celular').mask('(00)00000-0000', { clearIfNotMatch: true })
+  $('.telefone').mask('(00)0000-0000', { clearIfNotMatch: true })
+  $('.cep').mask('00.000-000', { clearIfNotMatch: true })
+  $(".cpf").mask("000.000.000-00", { clearIfNotMatch: true })
+  $(".cnpj").mask("00.000.000/0000-00", { clearIfNotMatch: true })
+  $('.money').mask('00.000.000,00', { reverse: true })
+  $('.percent').mask('000.00', { reverse: true })
+})
+
+// FUNÇÃO INPUT TEXT MAIUSCOLO
+$('input[type="text"]').keyup(function () {
+  let inputName = $(this).attr('name')
+  if (inputName != 'map') {
+    let cursor = this.selectionStart
+    this.value = this.value.toUpperCase()
+    this.setSelectionRange(cursor, cursor)
+  }
+})
