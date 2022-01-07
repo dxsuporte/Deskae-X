@@ -1,7 +1,7 @@
 <style>
   :root {
-    --dropdown: {{auth.user.theme === 0 ? '#f8faf9' : '#343a40'}};
-    --theme: {{auth.user.theme ? '#f8faf9' : '#343a40'}};
-    --primaryColor: {{auth.user.primaryColor}};
+    --dropdown: {{auth.user?.theme ? '#343a40' : '#f8faf9'}};
+    --theme: {{auth.user?.theme ? '#f8faf9' : '#343a40'}};
+    --primaryColor: {{auth.user?.primaryColor || '#32CA42'}};
   }
 </style>

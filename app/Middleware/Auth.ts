@@ -35,7 +35,6 @@ export default class AuthMiddleware {
 
     //Buscar dados do emitente
     const myEmitente = await Emitente.find(1)
-    View.global('myEmitente', myEmitente)
 
     const lebelMenu = {
       home: 'Home',
